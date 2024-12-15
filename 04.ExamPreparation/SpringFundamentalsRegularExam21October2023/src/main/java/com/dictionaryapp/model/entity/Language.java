@@ -25,6 +25,13 @@ public class Language {
     public Language() {
     }
 
+    public Language(LanguageEnum languageEnum, String description) {
+        super();
+
+        this.languageName = languageEnum;
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }
