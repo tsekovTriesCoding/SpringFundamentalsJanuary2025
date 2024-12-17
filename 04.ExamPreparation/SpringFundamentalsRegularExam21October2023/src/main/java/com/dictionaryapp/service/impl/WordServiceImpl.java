@@ -97,7 +97,11 @@ public class WordServiceImpl implements WordService {
         Set<Word> assignedWords = addedBy.getAddedWords();
         assignedWords.remove(word);
 
-        this.wordRepository.delete(word);
         userRepository.save(addedBy);
+    }
+
+    @Override
+    public long getAllCount() {
+        return this.wordRepository.count();
     }
 }

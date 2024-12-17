@@ -39,6 +39,10 @@ public class WordController {
 
     @GetMapping("/add-word")
     public String viewAddWord() {
+        if (!this.loggedUser.isLoggedIn()) {
+            return "redirect:/login";
+        }
+
         return "/word-add";
     }
 

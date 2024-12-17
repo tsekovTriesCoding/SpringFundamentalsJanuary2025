@@ -17,4 +17,6 @@ public interface WordService {
     Set<Word> getAllItalianWords();
 
     void removeWordById(Long id);
+
+    long getAllCount();
 }

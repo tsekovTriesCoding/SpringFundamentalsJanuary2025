@@ -6,10 +6,12 @@ import com.dictionaryapp.model.entity.User;
 import com.dictionaryapp.repo.UserRepository;
 import com.dictionaryapp.service.LoggedUser;
 import com.dictionaryapp.service.UserService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,5 +78,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findById(long id) {
         return this.userRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public void removeAllWords() {
+        List<User> all = this.userRepository.findAll();
+        all.forEach(e -> {
+            e.getAddedWords().clear();
+            this.userRepository.save(e);
+        });
     }
 }

@@ -73,7 +73,7 @@
                 </th:block>
             </div>
         </div>
-        <a href="/home/remove-all" class="btn btn-danger">Remove all {allWordsCount} words</a>
+        <a href="/home/remove-all" class="btn btn-danger" th:text="|Remove all ${allCount} words|">Remove all {allWordsCount} words</a>
     </div>
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>

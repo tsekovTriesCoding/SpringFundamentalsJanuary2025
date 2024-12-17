@@ -14,4 +14,6 @@ public interface UserService {
     void logout();
 
     Optional<User> findById(long id);
+
+    void removeAllWords();
 }
