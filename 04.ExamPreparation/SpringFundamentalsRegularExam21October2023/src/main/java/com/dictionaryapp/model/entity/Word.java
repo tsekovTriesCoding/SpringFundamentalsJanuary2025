@@ -14,6 +14,9 @@ public class Word {
     @Column(nullable = false)
     private String term;
 
+    @Column(nullable = false)
+    private String translation;
+
     @Column
     private String example;
 
@@ -44,6 +47,15 @@ public class Word {
 
     public Word setTerm(String term) {
         this.term = term;
+        return this;
+    }
+
+    public String getTranslation() {
+        return translation;
+    }
+
+    public Word setTranslation(String translation) {
+        this.translation = translation;
         return this;
     }
 
