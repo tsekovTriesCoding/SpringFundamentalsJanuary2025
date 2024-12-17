@@ -82,4 +82,10 @@ public class UserController {
 
         return "redirect:/home";
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        this.userService.logout();
+        return "redirect:/";
+    }
 }
