@@ -21,7 +21,7 @@
                         <span th:text="|Example: ${germanWord.example}|">Example: {example}</span>
                         <br>
                         <span th:text="|Added by: ${germanWord.addedBy.username} on ${germanWord.inputDate}|">Added by: {username} on {inputDate}</span>
-                        <a class="ml-3 text-danger" href="/">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{remove-word/{id}(id = ${germanWord.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>
@@ -36,7 +36,7 @@
                         <span th:text="|Example:${spanishWord.example}|"></span>
                         <br>
                         <span th:text="|Added by: ${spanishWord.addedBy.username} on ${spanishWord.inputDate}|"></span>
-                        <a class="ml-3 text-danger" th:href="@{/home/remove-word-by-id/{id}(id = ${spanishWord.id})}">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{remove-word/{id}(id = ${spanishWord.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>
@@ -53,7 +53,7 @@
                         <span th:text="|Example: ${frenchWord.example}|"></span>
                         <br>
                         <span th:text="|Added by: ${frenchWord.addedBy.username} on ${frenchWord.inputDate}|"></span>
-                        <a class="ml-3 text-danger" th:href="@{/home/remove-word-by-id/{id}(id = ${frenchWord.id})}">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{remove-word/{id}(id = ${frenchWord.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>
@@ -68,7 +68,7 @@
                         <span th:text="|Example: ${italianWord.example}|"></span>
                         <br>
                         <span th:text="|Added by: ${italianWord.addedBy.username} on ${italianWord.inputDate}|"></span>
-                        <a class="ml-3 text-danger" th:href="@{/home/remove-word-by-id/{id}(id = ${italianWord.id})}">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{remove-word/{id}(id = ${italianWord.id})}">Remove</a>
                     </div>
                 </th:block>
             </div>

@@ -62,30 +62,42 @@ public class WordServiceImpl implements WordService {
 
     @Override
     public Set<Word> getAllGermanWords() {
-        Language languageGerman = languageRepository.findByLanguageName(LanguageEnum.GERMAN).orElse(null);
-        Set<Word> allGermanWords = wordRepository.findAllByLanguage(languageGerman);
+        Language languageGerman = this.languageRepository.findByLanguageName(LanguageEnum.GERMAN).orElse(null);
+        Set<Word> allGermanWords = this.wordRepository.findAllByLanguage(languageGerman);
 
         return allGermanWords;
     }
 
     @Override
     public Set<Word> getAllFrenchWords() {
-        Language languageFrench = languageRepository.findByLanguageName(LanguageEnum.FRENCH).orElse(null);
+        Language languageFrench = this.languageRepository.findByLanguageName(LanguageEnum.FRENCH).orElse(null);
 
-        return wordRepository.findAllByLanguage(languageFrench);
+        return this.wordRepository.findAllByLanguage(languageFrench);
     }
 
     @Override
     public Set<Word> getAllSpanishWords() {
-        Language languageSpanish = languageRepository.findByLanguageName(LanguageEnum.SPANISH).orElse(null);
+        Language languageSpanish = this.languageRepository.findByLanguageName(LanguageEnum.SPANISH).orElse(null);
 
-        return wordRepository.findAllByLanguage(languageSpanish);
+        return this.wordRepository.findAllByLanguage(languageSpanish);
     }
 
     @Override
     public Set<Word> getAllItalianWords() {
-        Language languageItalian = languageRepository.findByLanguageName(LanguageEnum.ITALIAN).orElse(null);
+        Language languageItalian = this.languageRepository.findByLanguageName(LanguageEnum.ITALIAN).orElse(null);
 
-        return wordRepository.findAllByLanguage(languageItalian);
+        return this.wordRepository.findAllByLanguage(languageItalian);
+    }
+
+    @Transactional
+    @Override
+    public void removeWordById(Long id) {
+        Word word = this.wordRepository.findById(id).orElse(null);
+        User addedBy = word.getAddedBy();
+        Set<Word> assignedWords = addedBy.getAddedWords();
+        assignedWords.remove(word);
+
+        this.wordRepository.delete(word);
+        userRepository.save(addedBy);
     }
 }

@@ -15,4 +15,6 @@ public interface WordService {
     Set<Word> getAllSpanishWords();
 
     Set<Word> getAllItalianWords();
+
+    void removeWordById(Long id);
 }
