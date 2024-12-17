@@ -23,6 +23,11 @@ public class Priority extends BaseEntity {
         this.tasks = new ArrayList<>();
     }
 
+    public Priority(PriorityEnum name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public PriorityEnum getName() {
         return name;
     }
