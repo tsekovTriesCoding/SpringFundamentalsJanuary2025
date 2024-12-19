@@ -29,8 +29,9 @@
                     class="form-control"
                     id="username"
                     name="username"
-                    th:field="*{username}"/>
-            <small class="text-danger">Username error message</small>
+                    th:field="*{username}"
+                    th:errorclass="'is-invalid bg-danger'"/>
+            <small th:errors="*{username}" class="text-danger">Username error message</small>
         </div>
 
         <div class="form-group">
@@ -42,8 +43,9 @@
                     class="form-control"
                     id="email"
                     name="email"
-                    th:field="*{email}"/>
-            <small class="text-danger">Email error message</small>
+                    th:field="*{email}"
+                    th:errorclass="'is-invalid bg-danger'"/>
+            <small th:errors="*{email}" class="text-danger">Email error message</small>
         </div>
 
         <div class="form-group">
@@ -55,8 +57,9 @@
                     class="form-control"
                     id="password"
                     name="password"
-                    th:field="*{password}"/>
-            <small class="text-danger">Password error message</small>
+                    th:field="*{password}"
+                    th:errorclass="'is-invalid bg-danger'"/>
+            <small th:errors="*{password}" class="text-danger">Password error message</small>
         </div>
 
         <div class="form-group">
@@ -68,8 +71,9 @@
                     class="form-control"
                     id="confirmPassword"
                     name="confirmPassword"
-                    th:field="*{confirmPassword}"/>
-            <small class="text-danger">Password error message</small>
+                    th:field="*{confirmPassword}"
+                    th:errorclass="'is-invalid bg-danger'"/>
+            <small th:errors="*{confirmPassword}" class="text-danger">Password error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">
