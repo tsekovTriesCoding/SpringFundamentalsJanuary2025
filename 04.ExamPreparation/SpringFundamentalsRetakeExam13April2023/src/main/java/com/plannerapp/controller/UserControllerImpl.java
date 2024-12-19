@@ -22,6 +22,11 @@ public class UserControllerImpl implements UserController {
         return new RegisterDTO();
     }
 
+    @ModelAttribute
+    public LoginDTO loginDTO() {
+        return new LoginDTO();
+    }
+
     @Autowired
     public UserControllerImpl(UserServiceImpl userService, LoggedUser loggedUser) {
         this.userService = userService;
