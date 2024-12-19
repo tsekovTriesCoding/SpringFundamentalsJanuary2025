@@ -29,4 +29,9 @@ public class LoggedUser {
     public boolean isLogged() {
         return this.username != null && this.id != null;
     }
+
+    public void logout() {
+        this.id = null;
+        this.username = null;
+    }
 }

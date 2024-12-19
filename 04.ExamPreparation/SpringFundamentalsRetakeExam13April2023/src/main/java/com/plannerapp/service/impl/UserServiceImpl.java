@@ -1,25 +1,35 @@
 package com.plannerapp.service.impl;
 
 import com.plannerapp.model.dto.RegisterDTO;
+import com.plannerapp.model.entity.Task;
 import com.plannerapp.model.entity.User;
 import com.plannerapp.repo.UserRepository;
 import com.plannerapp.service.UserService;
 import com.plannerapp.util.LoggedUser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final HttpSession session;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           LoggedUser loggedUser,
+                           HttpSession session) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.session = session;
     }
 
     @Override
@@ -53,6 +63,23 @@ public class UserServiceImpl implements UserService {
         User user = this.getUserByUsername(username);
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
+    }
+
+    @Override
+    public void logout() {
+        this.session.invalidate();
+        this.loggedUser.logout();
+    }
+
+    @Override
+    public Optional<User> findUserById(Long id) {
+        return this.userRepository.findById(id);
+    }
+
+    @Override
+    public List<Task> getAssignedTasksFromCurrentUser(Long id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        return user.getAssignedTasks();
     }
 
     private User mapUser(RegisterDTO registerDTO) {
