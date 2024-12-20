@@ -6,7 +6,6 @@ import com.plannerapp.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface UserService {
     void register(RegisterDTO registerDTO);
