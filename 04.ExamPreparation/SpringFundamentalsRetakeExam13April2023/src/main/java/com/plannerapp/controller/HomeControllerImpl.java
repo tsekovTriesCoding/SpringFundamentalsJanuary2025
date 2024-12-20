@@ -27,11 +27,19 @@ public class HomeControllerImpl implements HomeController {
 
     @Override
     public String index() {
+        if (loggedUser.isLogged()) {
+            return "redirect:/home";
+        }
+
         return "index";
     }
 
     @Override
     public String home(Model model) {
+        if (!loggedUser.isLogged()) {
+            return "redirect:/";
+        }
+
         User user = userService.findUserById(loggedUser.getId()).orElse(null);
         model.addAttribute("currentUserInfo", user);
 
@@ -46,6 +54,7 @@ public class HomeControllerImpl implements HomeController {
         List<Task> allUnassignedTasks = this.taskService.getAllUnassignedTasks();
         model.addAttribute("allUnassignedTasks", allUnassignedTasks);
         model.addAttribute("totalUnassignedTasks", allUnassignedTasks.size());
+
         return "home";
     }
 }
