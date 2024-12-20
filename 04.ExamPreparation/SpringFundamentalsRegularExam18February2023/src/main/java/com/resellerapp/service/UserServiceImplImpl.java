@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImplImpl implements UserServiceImpl {
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -48,5 +49,26 @@ public class UserServiceImplImpl implements UserServiceImpl {
     @Override
     public Optional<User> findUserById(long id) {
         return this.userRepository.findById(id);
+    }
+
+    @Override
+    public boolean checkCredentials(String username, String password) {
+        User user = this.getUserByUsername(username);
+
+        if (user == null) {
+            return false;
+        }
+
+        return this.passwordEncoder.matches(password, user.getPassword());
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return this.userRepository.findUserByUsername(username).orElse(null);
+    }
+
+    @Override
+    public void login(String username) {
+
     }
 }

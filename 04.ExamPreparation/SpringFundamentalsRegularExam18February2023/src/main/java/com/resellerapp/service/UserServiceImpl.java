@@ -10,4 +10,10 @@ public interface UserServiceImpl {
     void initTest();
 
     Optional<User> findUserById(long id);
+
+    boolean checkCredentials(String username, String password);
+
+    User getUserByUsername(String username);
+
+    void login(String username);
 }
