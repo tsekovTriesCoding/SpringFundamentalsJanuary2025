@@ -16,6 +16,11 @@ public class Condition extends BaseEntity {
     public Condition() {
     }
 
+    public Condition(ConditionEnum name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public ConditionEnum getName() {
         return name;
     }
