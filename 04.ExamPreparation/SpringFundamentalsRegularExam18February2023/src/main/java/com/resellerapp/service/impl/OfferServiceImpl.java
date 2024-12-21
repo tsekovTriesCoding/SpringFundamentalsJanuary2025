@@ -1,26 +1,29 @@
-package com.resellerapp.service;
+package com.resellerapp.service.impl;
 
 import com.resellerapp.model.entity.Offer;
 import com.resellerapp.model.entity.User;
 import com.resellerapp.model.enums.ConditionEnum;
 import com.resellerapp.repository.OfferRepository;
 import com.resellerapp.repository.UserRepository;
+import com.resellerapp.service.ConditionService;
+import com.resellerapp.service.OfferService;
+import com.resellerapp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OfferServiceImplImpl implements OfferServiceImpl {
-    private final UserServiceImpl userService;
+public class OfferServiceImpl implements OfferService {
+    private final UserService userService;
     private final ConditionService conditionService;
     private final OfferRepository offerRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public OfferServiceImplImpl(UserServiceImpl userService,
-                                ConditionService conditionService,
-                                OfferRepository offerRepository,
-                                UserRepository userRepository) {
+    public OfferServiceImpl(UserService userService,
+                            ConditionService conditionService,
+                            OfferRepository offerRepository,
+                            UserRepository userRepository) {
         this.userService = userService;
         this.conditionService = conditionService;
         this.offerRepository = offerRepository;

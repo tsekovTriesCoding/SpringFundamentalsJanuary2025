@@ -1,5 +1,5 @@
 package com.resellerapp.service;
 
-public interface OfferServiceImpl {
+public interface OfferService {
     void addTestOffers();
 }

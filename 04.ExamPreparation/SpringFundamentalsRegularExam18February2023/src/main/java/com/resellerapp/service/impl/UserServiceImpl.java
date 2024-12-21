@@ -1,7 +1,9 @@
-package com.resellerapp.service;
+package com.resellerapp.service.impl;
 
 import com.resellerapp.model.entity.User;
 import com.resellerapp.repository.UserRepository;
+import com.resellerapp.service.UserService;
+import com.resellerapp.util.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,15 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserServiceImplImpl implements UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
+    private final LoggedUser loggedUser;
 
     @Autowired
-    public UserServiceImplImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loggedUser = loggedUser;
     }
 
     @Override
@@ -69,6 +72,13 @@ public class UserServiceImplImpl implements UserServiceImpl {
 
     @Override
     public void login(String username) {
+        User user = this.getUserByUsername(username);
+        this.loggedUser.setId(user.getId());
+        this.loggedUser.setUsername(user.getUsername());
+    }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).orElse(null);
     }
 }

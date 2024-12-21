@@ -1,7 +1,7 @@
 package com.resellerapp.init;
 
-import com.resellerapp.service.OfferServiceImpl;
-import com.resellerapp.service.UserServiceImpl;
+import com.resellerapp.service.OfferService;
+import com.resellerapp.service.UserService;
 import com.resellerapp.service.impl.ConditionServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FirstInit implements CommandLineRunner {
     private final ConditionServiceImpl conditionService;
-    private final UserServiceImpl userService;
-    private final OfferServiceImpl offerService;
+    private final UserService userService;
+    private final OfferService offerService;
 
-    public FirstInit(ConditionServiceImpl conditionService, UserServiceImpl userService, OfferServiceImpl offerService) {
+    public FirstInit(ConditionServiceImpl conditionService, UserService userService, OfferService offerService) {
         this.conditionService = conditionService;
         this.userService = userService;
         this.offerService = offerService;

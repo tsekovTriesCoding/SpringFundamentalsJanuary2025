@@ -4,7 +4,7 @@ import com.resellerapp.model.entity.User;
 
 import java.util.Optional;
 
-public interface UserServiceImpl {
+public interface UserService {
     void initAdmin();
 
     void initTest();
@@ -16,4 +16,6 @@ public interface UserServiceImpl {
     User getUserByUsername(String username);
 
     void login(String username);
+
+    User findUserByEmail(String email);
 }
