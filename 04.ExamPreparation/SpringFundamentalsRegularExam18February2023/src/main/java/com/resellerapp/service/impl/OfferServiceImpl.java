@@ -1,5 +1,8 @@
 package com.resellerapp.service.impl;
 
+import com.resellerapp.model.dto.AddOfferDTO;
+import com.resellerapp.model.dto.OfferDTO;
+import com.resellerapp.model.entity.Condition;
 import com.resellerapp.model.entity.Offer;
 import com.resellerapp.model.entity.User;
 import com.resellerapp.model.enums.ConditionEnum;
@@ -11,8 +14,6 @@ import com.resellerapp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -107,6 +108,22 @@ public class OfferServiceImpl implements OfferService {
 
         this.userRepository.save(admin1);
         this.userRepository.save(test1);
+    }
+
+    @Override
+    public void addOffer(AddOfferDTO addOfferDTO, Long userId) {
+        Offer offer = new Offer();
+        Condition condition = this.conditionService.findCondition(addOfferDTO.getCondition());
+
+        offer.setDescription(addOfferDTO.getDescription())
+                .setPrice(addOfferDTO.getPrice())
+                .setCondition(condition);
+
+        User user = this.userService.findUserById(userId).orElse(null);
+        user.getOffers().add(offer);
+
+        this.offerRepository.save(offer);
+        this.userRepository.save(user);
     }
 
 }
