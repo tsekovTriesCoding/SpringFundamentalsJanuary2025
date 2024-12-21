@@ -1,5 +1,6 @@
 package com.likebookapp.service.impl;
 
+import com.likebookapp.model.dto.RegisterDTO;
 import com.likebookapp.model.entity.User;
 import com.likebookapp.repository.UserRepository;
 import com.likebookapp.service.UserService;
@@ -7,6 +8,8 @@ import com.likebookapp.util.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -58,4 +61,25 @@ public class UserServiceImpl implements UserService {
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        this.userRepository.save(this.mapUser(registerDTO));
+    }
+
+    private User mapUser(RegisterDTO registerDTO) {
+        User user = new User();
+
+        user.setUsername(registerDTO.getUsername());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+
+        return user;
+    }
+
 }

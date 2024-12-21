@@ -12,9 +12,6 @@
           th:method="POST"
           th:object="${loginDTO}">
 
-        <!--    Example: Render errors messages with fields.errors - you can make it differently. -->
-        <!--    <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>-->
-
         <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>
         <div th:if="${validCredentials == false}" class="text-danger">Incorrect username or password!</div>
 
