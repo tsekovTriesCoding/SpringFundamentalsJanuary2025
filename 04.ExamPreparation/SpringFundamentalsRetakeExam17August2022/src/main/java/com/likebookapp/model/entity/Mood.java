@@ -16,6 +16,10 @@ public class Mood extends BaseEntity{
     public Mood() {
     }
 
+    public Mood(MoodEnum name) {
+        this.moodName = name;
+    }
+
     public MoodEnum getMoodName() {
         return moodName;
     }
