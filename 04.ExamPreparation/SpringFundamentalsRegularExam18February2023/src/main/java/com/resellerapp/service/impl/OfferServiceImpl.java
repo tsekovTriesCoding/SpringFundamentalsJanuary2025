@@ -15,6 +15,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OfferServiceImpl implements OfferService {
     private final UserService userService;
@@ -125,5 +127,30 @@ public class OfferServiceImpl implements OfferService {
         this.offerRepository.save(offer);
         this.userRepository.save(user);
     }
+
+    @Override
+    public void buyOffer(Long offerId, Long userId) {
+        User buyer = this.userService.findUserById(userId).orElse(null);
+        User seller = this.userRepository.findUserByOffers_Id(offerId).orElse(null);
+
+        Offer offer = seller.getOffers().stream().filter(e -> e.getId() == offerId).findFirst().orElse(null);
+        boolean remove = seller.getOffers().remove(offer);
+        boolean add = buyer.getBoughtOffers().add(offer);
+
+        this.userRepository.save(seller);
+        this.userRepository.save(buyer);
+    }
+
+    @Override
+    public void removeOffer(Long offerId, Long userId) {
+        User user = this.userService.findUserById(userId).orElse(null);
+        Offer offer = user.getOffers().stream().filter(e -> e.getId() == offerId).findFirst().orElse(null);
+
+        user.getOffers().remove(offer);
+
+        this.userRepository.save(user);
+        this.offerRepository.delete(offer);
+    }
+
 
 }

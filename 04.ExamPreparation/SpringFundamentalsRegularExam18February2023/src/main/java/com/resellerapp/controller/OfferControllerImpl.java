@@ -1,8 +1,11 @@
 package com.resellerapp.controller;
 
 import com.resellerapp.model.dto.AddOfferDTO;
-import com.resellerapp.model.dto.OfferDTO;
+import com.resellerapp.model.entity.Offer;
+import com.resellerapp.model.entity.User;
+import com.resellerapp.repository.UserRepository;
 import com.resellerapp.service.impl.OfferServiceImpl;
+import com.resellerapp.service.impl.UserServiceImpl;
 import com.resellerapp.util.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +49,20 @@ public class OfferControllerImpl implements OfferController {
         }
 
         this.offerService.addOffer(addOfferDTO, loggedUser.getId());
+
+        return "redirect:/home";
+    }
+
+    @Override
+    public String buyOffer(Long id) {
+        this.offerService.buyOffer(id, loggedUser.getId());
+
+        return "redirect:/home";
+    }
+
+    @Override
+    public String removeOffer(Long id) {
+        this.offerService.removeOffer(id, this.loggedUser.getId());
 
         return "redirect:/home";
     }

@@ -22,9 +22,9 @@
                                 <td th:text="${offer.getCondition().getName().getValue().toString()}" style="width: 5%"
                                     class="bg-info">{condition}
                                 </td>
-                                <td th:text="${offer.getPrice()}" class="bg-primary" style="width: 15%">{price} €</td>
+                                <td th:text="|${offer.getPrice()} €|" class="bg-primary" style="width: 15%">{price} €</td>
                                 <td th:text="${offer.getDescription()}">{description}</td>
-                                <td style="width: 15%"><a class="btn-danger btn" href="/">Remove</a>
+                                <td style="width: 15%"><a class="btn-danger btn" th:href="@{/offers/remove/{id}(id=*{offer.id})}">Remove</a>
                                 </td>
                             </tr>
                         </table>
@@ -84,7 +84,7 @@
                                                 <a th:text="|Price: ${offer.price} €|">Price: {offerPrice} €</a>
                                             </td>
                                             <td>
-                                                <a class="ml-3 text-danger" href="/">
+                                                <a class="ml-3 text-danger" th:href="@{/offers/buy-offer/{id}(id=*{offer.id})}">
                                                     <img src="/img/buy.png" height="35px"></a>
                                             </td>
                                         </tr>
