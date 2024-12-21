@@ -1,6 +1,6 @@
 package com.resellerapp.vallidation.annotation;
 
-import com.plannerapp.vallidation.UniqueUsernameValidator;
+import com.resellerapp.vallidation.UniqueUsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
