@@ -8,6 +8,7 @@ import com.resellerapp.model.entity.User;
 import com.resellerapp.repository.UserRepository;
 import com.resellerapp.service.UserService;
 import com.resellerapp.util.LoggedUser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final HttpSession session;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           LoggedUser loggedUser,
+                           HttpSession session) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.session = session;
     }
 
     @Override
@@ -113,6 +119,12 @@ public class UserServiceImpl implements UserService {
         List<User> otherUsers = this.userRepository.findAllByIdIsNot(id);
 
         return mapToAllOtherUsersOffersDTO(otherUsers);
+    }
+
+    @Override
+    public void logout() {
+        this.session.invalidate();
+        this.loggedUser.logout();
     }
 
     private List<UserWithOfferDTO> mapToAllOtherUsersOffersDTO(List<User> otherUsers) {

@@ -30,4 +30,6 @@ public interface UserService {
     List<Offer> getBoughtOffers(Long id);
 
     List<UserWithOfferDTO> getAllOtherOffers(Long id);
+
+    void logout();
 }
