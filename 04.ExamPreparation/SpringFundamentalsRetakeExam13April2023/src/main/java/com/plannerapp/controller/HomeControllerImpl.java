@@ -40,7 +40,7 @@ public class HomeControllerImpl implements HomeController {
             return "redirect:/";
         }
 
-        User user = userService.findUserById(loggedUser.getId()).orElse(null);
+        User user = this.userService.findUserById(loggedUser.getId()).orElse(null);
         model.addAttribute("currentUserInfo", user);
 
         List<Task> usersAssignedTasks = this.userService.getAssignedTasksFromCurrentUser(this.loggedUser.getId());

@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OfferServiceImpl implements OfferService {
     private final UserService userService;
@@ -106,4 +108,5 @@ public class OfferServiceImpl implements OfferService {
         this.userRepository.save(admin1);
         this.userRepository.save(test1);
     }
+
 }

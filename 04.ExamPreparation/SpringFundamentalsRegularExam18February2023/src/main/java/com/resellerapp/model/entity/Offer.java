@@ -1,9 +1,6 @@
 package com.resellerapp.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "offers")
@@ -46,4 +43,5 @@ public class Offer extends BaseEntity {
         this.condition = condition;
         return this;
     }
+
 }

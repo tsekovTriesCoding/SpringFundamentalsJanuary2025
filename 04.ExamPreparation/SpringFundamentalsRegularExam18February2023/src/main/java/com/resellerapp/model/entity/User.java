@@ -17,10 +17,10 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Offer> offers;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Offer> boughtOffers;
 
     public User() {

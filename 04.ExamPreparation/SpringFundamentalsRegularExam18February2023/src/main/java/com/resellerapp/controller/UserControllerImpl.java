@@ -28,6 +28,11 @@ public class UserControllerImpl implements UserController {
         return new LoginDTO();
     }
 
+    @ModelAttribute
+    public RegisterDTO registerDTO() {
+        return new RegisterDTO();
+    }
+
     @Override
     public String login(Model model) {
         if (this.loggedUser.isLogged()) {

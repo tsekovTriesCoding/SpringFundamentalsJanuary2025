@@ -1,7 +1,5 @@
 package com.resellerapp.vallidation;
 
-import com.plannerapp.service.impl.UserServiceImpl;
-import com.plannerapp.vallidation.annotation.UniqueUsername;
 import com.resellerapp.service.impl.UserServiceImpl;
 import com.resellerapp.vallidation.annotation.UniqueUsername;
 import jakarta.validation.ConstraintValidator;
