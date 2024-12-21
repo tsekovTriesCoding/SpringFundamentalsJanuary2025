@@ -9,7 +9,7 @@
 
         <div class="col-5">
             <h3 class=" bg-gray text-dark  mb-0 mt-2">Assigned to me</h3>
-            <h6 class=" bg-gray text-dark  mb-0 mt-0">Username: {loggedUsername}</h6>
+            <h6 th:text="|Username: ${@loggedUser.getUsername()}|" class=" bg-gray text-dark  mb-0 mt-0">Username: {loggedUsername}</h6>
             <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
                 <ul th:each="task : ${usersAssignedTasks}" class="list-group list-group-horizontal text-dark">
                     <br>
@@ -38,7 +38,7 @@
 
         <div class="col-5">
             <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">All Available Tasks</h3>
-            <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">{totalUnassignedTasks} Tasks</h6>
+            <h6 th:text="|${totalUnassignedTasks} Tasks|" class="mySticky bg-gray text-dark  mb-0 mt-0">{totalUnassignedTasks} Tasks</h6>
             <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
                 <th:block th:each="unassignedTask : ${allUnassignedTasks}">
                     <br>
