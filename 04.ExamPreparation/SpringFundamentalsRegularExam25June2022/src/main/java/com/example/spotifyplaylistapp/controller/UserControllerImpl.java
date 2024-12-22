@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -71,7 +72,25 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public String registerConfirm(RegisterDTO registerDTO, BindingResult result, RedirectAttributes redirectAttributes) {
-        return "";
+        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
+            result.addError(
+                    new FieldError(
+                            "differentConfirmPassword",
+                            "confirmPassword",
+                            "Passwords don't match."));
+        }
+
+        if (result.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("registerDTO", registerDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", result);
+
+            return "redirect:/users/register";
+        }
+
+        this.userService.register(registerDTO);
+
+        return "redirect:/home";
     }
 
     @Override

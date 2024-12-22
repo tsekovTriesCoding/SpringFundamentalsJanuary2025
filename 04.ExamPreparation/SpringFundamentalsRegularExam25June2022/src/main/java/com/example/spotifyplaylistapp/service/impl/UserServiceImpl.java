@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
         admin.setEmail("admin@abv.bg");
         this.userRepository.save(admin);
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).orElse(null);
+    }
 }

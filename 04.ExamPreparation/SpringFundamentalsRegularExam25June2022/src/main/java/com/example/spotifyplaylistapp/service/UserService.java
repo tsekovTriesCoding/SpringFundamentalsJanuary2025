@@ -10,4 +10,6 @@ public interface UserService {
     void login(String username);
 
     void initAdmin();
+
+    User findUserByEmail(String value);
 }
