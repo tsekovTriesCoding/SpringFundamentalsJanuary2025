@@ -98,4 +98,26 @@ public class PostServiceImpl implements PostService {
         this.postRepository.save(post);
         this.userRepository.save(user);
     }
+
+    @Override
+    public void removePost(Long postId, Long userId) {
+        User user = this.userService.findUserById(userId).orElse(null);
+        Post post = user.getPosts().stream().filter(p -> p.getId() == postId).findFirst().orElse(null);
+
+        user.getPosts().remove(post);
+
+        this.userRepository.save(user);
+        this.postRepository.delete(post);
+    }
+
+    @Override
+    public void likePost(Long postId, Long userId) {
+        User user = this.userService.findUserById(userId).orElse(null);
+        Post post = this.postRepository.findById(postId).orElse(null);
+
+        post.getUserLikes().add(user);
+
+        this.postRepository.save(post);
+
+    }
 }

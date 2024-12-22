@@ -48,4 +48,18 @@ public class PostControllerImpl implements PostController {
 
         return "redirect:/home";
     }
+
+    @Override
+    public String removePost(Long id) {
+        this.postService.removePost(id, this.loggedUser.getId());
+
+        return "redirect:/home";
+    }
+
+    @Override
+    public String likePost(Long id) {
+        this.postService.likePost(id, this.loggedUser.getId());
+
+        return "redirect:/home";
+    }
 }

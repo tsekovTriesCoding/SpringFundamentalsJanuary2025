@@ -23,7 +23,7 @@
                                 likes
                             </td>
                             <td th:text="${post.content}">{content}</td>
-                            <td style="width: 15%"><a class="btn-danger btn" href="/">Remove</a></td>
+                            <td style="width: 15%"><a class="btn-danger btn" th:href="@{/posts/remove/{id}(id=*{post.id})}">Remove</a></td>
                         </tr>
                     </table>
                 </div>
@@ -54,7 +54,7 @@
                                             <td th:text="|${post.likes} likes|" class="text-primary">{numberOfLikes}
                                                 likes
                                             </td>
-                                            <td><a class="ml-3 text-danger" href="/"><img src="/img/like.png"
+                                            <td><a class="ml-3 text-danger" th:href="@{/posts/like-post/{id}(id=*{post.id})}"><img src="/img/like.png"
                                                                                           width="43px"
                                                                                           height="40px"></a></td>
                                         </tr>

@@ -3,6 +3,7 @@ package com.likebookapp.model.dto;
 import com.likebookapp.model.enums.MoodEnum;
 
 public class PostDTO {
+    private Long Id;
     private String content;
     private MoodEnum mood;
     private Integer likes;
@@ -16,6 +17,15 @@ public class PostDTO {
 
     public PostDTO setContent(String content) {
         this.content = content;
+        return this;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public PostDTO setId(Long id) {
+        Id = id;
         return this;
     }
 

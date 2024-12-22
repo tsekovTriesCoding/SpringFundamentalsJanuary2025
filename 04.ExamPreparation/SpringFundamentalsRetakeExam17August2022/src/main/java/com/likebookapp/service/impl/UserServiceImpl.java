@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
             PostDTO postDTO = new PostDTO();
 
             postDTO
+                    .setId(p.getId())
                     .setContent(p.getContent())
                     .setMood(p.getMood().getMoodName())
                     .setLikes(p.getUserLikes().size());
@@ -114,6 +115,7 @@ public class UserServiceImpl implements UserService {
                         PostDTO postDTO = new PostDTO();
 
                         postDTO
+                                .setId(p.getId())
                                 .setContent(p.getContent())
                                 .setMood(p.getMood().getMoodName())
                                 .setLikes(p.getUserLikes().size());
