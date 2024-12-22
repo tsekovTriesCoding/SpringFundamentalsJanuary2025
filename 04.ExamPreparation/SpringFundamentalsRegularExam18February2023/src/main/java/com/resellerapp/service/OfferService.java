@@ -1,10 +1,6 @@
 package com.resellerapp.service;
 
 import com.resellerapp.model.dto.AddOfferDTO;
-import com.resellerapp.model.dto.OfferDTO;
-import com.resellerapp.model.entity.Offer;
-
-import java.util.Optional;
 
 public interface OfferService {
     void addTestOffers();

@@ -28,4 +28,9 @@ public class MoodServiceImpl implements MoodService {
             this.moodRepository.save(mood);
         }
     }
+
+    @Override
+    public Mood findMood(MoodEnum moodEnum) {
+        return this.moodRepository.findByMoodName(moodEnum).orElse(null);
+    }
 }
