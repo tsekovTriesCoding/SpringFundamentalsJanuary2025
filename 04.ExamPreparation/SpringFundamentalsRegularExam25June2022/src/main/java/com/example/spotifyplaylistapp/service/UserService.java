@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.service;
 
+import com.example.spotifyplaylistapp.model.dto.RegisterDTO;
 import com.example.spotifyplaylistapp.model.entity.User;
 
 public interface UserService {
@@ -12,4 +13,6 @@ public interface UserService {
     void initAdmin();
 
     User findUserByEmail(String value);
+
+    void register(RegisterDTO registerDTO);
 }

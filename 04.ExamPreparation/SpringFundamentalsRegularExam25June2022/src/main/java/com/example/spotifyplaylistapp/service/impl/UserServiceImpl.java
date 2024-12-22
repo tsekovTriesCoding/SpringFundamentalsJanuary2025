@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.service.impl;
 
+import com.example.spotifyplaylistapp.model.dto.RegisterDTO;
 import com.example.spotifyplaylistapp.model.entity.User;
 import com.example.spotifyplaylistapp.repository.UserRepository;
 import com.example.spotifyplaylistapp.service.UserService;
@@ -61,5 +62,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return this.userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }
