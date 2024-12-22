@@ -24,6 +24,7 @@ public class FirstInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
         this.moodService.initMoods();
         this.userService.initAdmin();
+        this.userService.initTest();
         this.postService.addPosts();
     }
 }

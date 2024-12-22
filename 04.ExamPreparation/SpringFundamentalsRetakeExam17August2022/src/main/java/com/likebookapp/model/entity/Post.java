@@ -14,7 +14,7 @@ public class Post extends BaseEntity {
     @ManyToOne(optional = false)
     private User creator;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_likes",
             joinColumns = @JoinColumn(name = "post_id"),

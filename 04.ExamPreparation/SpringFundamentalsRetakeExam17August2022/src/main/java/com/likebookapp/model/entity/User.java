@@ -1,9 +1,6 @@
 package com.likebookapp.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +17,7 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @ManyToMany(mappedBy = "userLikes")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<Post> posts;
 
     public User() {
