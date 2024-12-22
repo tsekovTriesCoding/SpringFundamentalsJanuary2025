@@ -44,4 +44,17 @@ public class UserServiceImpl implements UserService {
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
     }
+
+    @Override
+    public void initAdmin() {
+        if (this.userRepository.count() > 0) {
+            return;
+        }
+
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword(this.passwordEncoder.encode("12345"));
+        admin.setEmail("admin@abv.bg");
+        this.userRepository.save(admin);
+    }
 }

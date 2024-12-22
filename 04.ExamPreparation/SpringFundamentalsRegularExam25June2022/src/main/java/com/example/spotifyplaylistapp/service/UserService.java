@@ -8,4 +8,6 @@ public interface UserService {
     User getUserByUsername(String username);
 
     void login(String username);
+
+    void initAdmin();
 }
