@@ -50,6 +50,13 @@ public class HomeControllerImpl implements HomeController {
         Set<UserWithPostsDTO> otherUsersPosts = this.userService.getOtherUsersPosts(this.loggedUser.getId());
         model.addAttribute("otherUsersPosts", otherUsersPosts);
 
+        int otherUsersPostsCount = otherUsersPosts
+                .stream()
+                .mapToInt(u -> u.getPosts().size())
+                .sum();
+
+        model.addAttribute("otherUsersPostsCount", otherUsersPostsCount);
+
         return "home";
     }
 }

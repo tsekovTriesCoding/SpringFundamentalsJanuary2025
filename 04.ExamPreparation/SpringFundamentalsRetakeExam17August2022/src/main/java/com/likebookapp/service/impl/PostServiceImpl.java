@@ -1,5 +1,7 @@
 package com.likebookapp.service.impl;
 
+import com.likebookapp.model.dto.AddPostDTO;
+import com.likebookapp.model.entity.Mood;
 import com.likebookapp.model.entity.Post;
 import com.likebookapp.model.entity.User;
 import com.likebookapp.model.enums.MoodEnum;
@@ -42,7 +44,7 @@ public class PostServiceImpl implements PostService {
 
         Post adminPost1 = new Post()
                 .setContent("Admin content")
-                .setMood(this.moodService.findMood(MoodEnum.Sad))
+                .setMood(this.moodService.findMood(MoodEnum.SAD))
                 .setCreator(admin)
                 .setUserLikes(Set.of(user));
 
@@ -52,7 +54,7 @@ public class PostServiceImpl implements PostService {
 
         Post adminPost2 = new Post()
                 .setContent("I am very happy!")
-                .setMood(this.moodService.findMood(MoodEnum.Happy))
+                .setMood(this.moodService.findMood(MoodEnum.HAPPY))
                 .setCreator(admin);
 
         admin.getPosts().add(adminPost2);
@@ -61,7 +63,7 @@ public class PostServiceImpl implements PostService {
 
         Post userPost1 = new Post()
                 .setContent("User content")
-                .setMood(this.moodService.findMood(MoodEnum.Inspired))
+                .setMood(this.moodService.findMood(MoodEnum.INSPIRED))
                 .setCreator(user)
                 .setUserLikes(Set.of(admin));
 
@@ -71,7 +73,7 @@ public class PostServiceImpl implements PostService {
 
         Post userPost2 = new Post()
                 .setContent("I am powewfulll!")
-                .setMood(this.moodService.findMood(MoodEnum.Happy))
+                .setMood(this.moodService.findMood(MoodEnum.HAPPY))
                 .setCreator(user);
 
         user.getPosts().add(userPost2);
@@ -79,6 +81,21 @@ public class PostServiceImpl implements PostService {
         this.postRepository.save(userPost2);
 
         this.userRepository.save(admin);
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void addPost(AddPostDTO addPostDTO, Long userId) {
+        Post post = new Post();
+        Mood mood = this.moodService.findMood(addPostDTO.getMood());
+        User user = this.userService.findUserById(userId).orElse(null);
+
+        post.setContent(addPostDTO.getContent())
+                .setMood(mood).setCreator(user);
+
+        user.getPosts().add(post);
+
+        this.postRepository.save(post);
         this.userRepository.save(user);
     }
 }

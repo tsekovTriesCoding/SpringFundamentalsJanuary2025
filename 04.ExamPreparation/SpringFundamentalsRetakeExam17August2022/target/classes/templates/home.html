@@ -18,7 +18,7 @@
                                 <img class="mr-2 " src="/img/post-bubble.png" alt="PostBubble" width="30px"
                                      height="30px">
                             </td>
-                            <td th:text="${post.mood}" style="width: 5%" class="bg-info">{mood}</td>
+                            <td th:text="${post.mood.getValue().toString()}" style="width: 5%" class="bg-info">{mood}</td>
                             <td th:text="|${post.likes} likes|" class="bg-primary" style="width: 15%">{numberOfLikes)
                                 likes
                             </td>
@@ -31,7 +31,7 @@
 
             <div class="col-6 mt-1 mb-1">
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">All Other Posts</h3>
-                <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">{otherUsersPostsTotalCount} total posts</h6>
+                <h6 th:text="|${otherUsersPostsCount} total posts|" class="mySticky bg-gray text-dark  mb-0 mt-0">{otherUsersPostsTotalCount} total posts</h6>
                 <div class="bg-dark rounded m-auto" style="height: 68.5vh; overflow: auto">
                     <th:block th:each="user : ${otherUsersPosts}">
                         <th:block th:each="post : ${user.posts}">
@@ -50,7 +50,7 @@
                                 <li class="list-group-item bg-gray">
                                     <table>
                                         <tr>
-                                            <td th:text="|Mood: ${post.mood}|" style="width: 10%">Mood: {mood}</td>
+                                            <td th:text="|Mood: ${post.mood.getValue().toString()}|" style="width: 10%">Mood: {mood}</td>
                                             <td th:text="|${post.likes} likes|" class="text-primary">{numberOfLikes}
                                                 likes
                                             </td>
