@@ -16,6 +16,10 @@ public class Style extends BaseEntity {
     public Style() {
     }
 
+    public Style(StyleEnum styleName) {
+        this.styleName = styleName;
+    }
+
     public String getDescription() {
         return description;
     }
