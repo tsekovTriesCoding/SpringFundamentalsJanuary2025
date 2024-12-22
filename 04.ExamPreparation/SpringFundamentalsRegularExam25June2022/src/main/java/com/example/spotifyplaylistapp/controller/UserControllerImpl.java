@@ -62,7 +62,11 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public String register() {
-        return "";
+        if (this.loggedUser.isLogged()) {
+            return "redirect:/home";
+        }
+
+        return "register";
     }
 
     @Override
