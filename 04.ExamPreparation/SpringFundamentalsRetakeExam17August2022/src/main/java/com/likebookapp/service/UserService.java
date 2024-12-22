@@ -28,4 +28,6 @@ public interface UserService {
     Set<UserWithPostsDTO> getOtherUsersPosts(Long id);
 
     void initTest();
+
+    void logout();
 }

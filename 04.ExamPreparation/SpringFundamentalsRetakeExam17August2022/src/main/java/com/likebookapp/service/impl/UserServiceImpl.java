@@ -8,6 +8,7 @@ import com.likebookapp.model.entity.User;
 import com.likebookapp.repository.UserRepository;
 import com.likebookapp.service.UserService;
 import com.likebookapp.util.LoggedUser;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,14 +24,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final HttpSession httpSession;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           LoggedUser loggedUser) {
+                           LoggedUser loggedUser,
+                           HttpSession httpSession) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.httpSession = httpSession;
     }
 
     @Override
@@ -141,6 +145,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(this.passwordEncoder.encode("12345"));
         user.setEmail("user@abv.bg");
         this.userRepository.save(user);
+    }
+
+    @Override
+    public void logout() {
+        this.httpSession.invalidate();
+        this.loggedUser.logout();
     }
 
     private User mapUser(RegisterDTO registerDTO) {
