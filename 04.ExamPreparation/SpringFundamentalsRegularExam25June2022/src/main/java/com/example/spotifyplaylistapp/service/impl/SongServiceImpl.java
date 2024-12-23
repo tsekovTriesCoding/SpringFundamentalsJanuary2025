@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.service.impl;
 
+import com.example.spotifyplaylistapp.model.dto.SongDTO;
 import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.Style;
 import com.example.spotifyplaylistapp.model.entity.User;
@@ -11,6 +12,10 @@ import com.example.spotifyplaylistapp.service.SongService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -91,5 +96,46 @@ public class SongServiceImpl implements SongService {
 
         this.userRepository.save(admin);
         this.userRepository.save(user);
+    }
+
+    @Override
+    public Set<SongDTO> getAllSongs() {
+        List<Song> allSongs = this.songRepository.findAll();
+
+        return mapSongs(allSongs);
+    }
+
+    @Override
+    public Set<SongDTO> getAllPopSongs() {
+        Style style = this.styleRepository.findByStyleName(StyleEnum.POP);
+        List<Song> allPopSongs = this.songRepository.getSongsByStyle(style);
+
+        return mapSongs(allPopSongs);
+    }
+
+    @Override
+    public Set<SongDTO> getAllRockSongs() {
+        Style style = this.styleRepository.findByStyleName(StyleEnum.ROCK);
+        List<Song> allRockSongs = this.songRepository.getSongsByStyle(style);
+
+        return mapSongs(allRockSongs);
+    }
+
+    @Override
+    public Set<SongDTO> getAllJazzSongs() {
+        Style style = this.styleRepository.findByStyleName(StyleEnum.JAZZ);
+        List<Song> allJazzSongs = this.songRepository.getSongsByStyle(style);
+
+        return mapSongs(allJazzSongs);
+    }
+
+    private Set<SongDTO> mapSongs(List<Song> songs) {
+        return songs.stream().map(song -> {
+            SongDTO songDTO = new SongDTO();
+            songDTO.setTitle(song.getTitle());
+            songDTO.setDuration(song.getDuration());
+            songDTO.setPerformer(song.getPerformer());
+            return songDTO;
+        }).collect(Collectors.toSet());
     }
 }
