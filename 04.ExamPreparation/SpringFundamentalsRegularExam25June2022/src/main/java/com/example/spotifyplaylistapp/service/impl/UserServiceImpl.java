@@ -7,6 +7,7 @@ import com.example.spotifyplaylistapp.model.entity.User;
 import com.example.spotifyplaylistapp.repository.UserRepository;
 import com.example.spotifyplaylistapp.service.UserService;
 import com.example.spotifyplaylistapp.util.LoggedUser;
+import com.example.spotifyplaylistapp.util.RoundDouble;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -95,9 +96,12 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(s -> {
                     SongDTO songDTO = new SongDTO();
+                    double duration = (double) s.getDuration() / 60;
+                    duration = RoundDouble.round(duration, 2);
+
                     songDTO.setId(s.getId());
                     songDTO.setTitle(s.getTitle());
-                    songDTO.setDuration(s.getDuration());
+                    songDTO.setDuration(duration);
                     songDTO.setPerformer(s.getPerformer());
 
                     return songDTO;

@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.service.impl;
 
+import com.example.spotifyplaylistapp.model.dto.AddSongDTO;
 import com.example.spotifyplaylistapp.model.dto.SongDTO;
 import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.Style;
@@ -9,6 +10,7 @@ import com.example.spotifyplaylistapp.repository.SongRepository;
 import com.example.spotifyplaylistapp.repository.StyleRepository;
 import com.example.spotifyplaylistapp.repository.UserRepository;
 import com.example.spotifyplaylistapp.service.SongService;
+import com.example.spotifyplaylistapp.util.RoundDouble;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,11 +131,27 @@ public class SongServiceImpl implements SongService {
         return mapSongs(allJazzSongs);
     }
 
+    @Override
+    public void addSong(AddSongDTO addSongDTO, Long userId) {
+        Song song = new Song();
+        song.setTitle(addSongDTO.getTitle());
+        song.setStyle(addSongDTO.getStyle());
+        song.setPerformer(addSongDTO.getPerformer());
+        song.setStyle(addSongDTO.getStyle());
+        song.setDuration(addSongDTO.getDurationInSeconds());
+
+        this.songRepository.save(song);
+    }
+
     private Set<SongDTO> mapSongs(List<Song> songs) {
         return songs.stream().map(song -> {
             SongDTO songDTO = new SongDTO();
+
+            double duration = (double)song.getDuration() / 60;
+            duration = RoundDouble.round(duration, 2);
+
             songDTO.setTitle(song.getTitle());
-            songDTO.setDuration(song.getDuration());
+            songDTO.setDuration(duration);
             songDTO.setPerformer(song.getPerformer());
             return songDTO;
         }).collect(Collectors.toSet());

@@ -1,5 +1,6 @@
 package com.example.spotifyplaylistapp.service;
 
+import com.example.spotifyplaylistapp.model.dto.AddSongDTO;
 import com.example.spotifyplaylistapp.model.dto.SongDTO;
 
 import java.util.Set;
@@ -14,4 +15,6 @@ public interface SongService {
     Set<SongDTO> getAllRockSongs();
 
     Set<SongDTO> getAllJazzSongs();
+
+    void addSong(AddSongDTO addSongDTO, Long userId);
 }

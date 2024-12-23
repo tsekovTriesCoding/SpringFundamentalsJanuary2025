@@ -42,15 +42,14 @@ public class HomeControllerImpl implements HomeController {
             return "redirect:/";
         }
 
-        User user = this.userService.findUserById(loggedUser.getId()).orElse(null);
-
         Set<SongDTO> userSongs = this.userService.getUserSongs(this.loggedUser.getId());
         model.addAttribute("userSongs", userSongs);
 
-        int totalSongsDuration = userSongs
+        double totalSongsDuration = userSongs
                 .stream()
-                .mapToInt(SongDTO::getDuration)
+                .mapToDouble(SongDTO::getDuration)
                 .sum();
+
         model.addAttribute("totalSongsDuration", totalSongsDuration);
 
         Set<SongDTO> allPopSongs = this.songService.getAllPopSongs();

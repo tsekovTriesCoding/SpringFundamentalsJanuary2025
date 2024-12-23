@@ -4,7 +4,7 @@ public class SongDTO {
     private Long id;
     private String title;
     private String performer;
-    private Integer duration;
+    private Double duration;
 
     public SongDTO() {
     }
@@ -18,11 +18,11 @@ public class SongDTO {
         return this;
     }
 
-    public Integer getDuration() {
+    public Double getDuration() {
         return duration;
     }
 
-    public SongDTO setDuration(Integer duration) {
+    public SongDTO setDuration(Double duration) {
         this.duration = duration;
         return this;
     }
