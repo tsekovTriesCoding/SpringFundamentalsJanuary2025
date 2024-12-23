@@ -1,13 +1,20 @@
 package com.example.spotifyplaylistapp.service.impl;
 
 import com.example.spotifyplaylistapp.model.dto.RegisterDTO;
+import com.example.spotifyplaylistapp.model.dto.SongDTO;
+import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.User;
 import com.example.spotifyplaylistapp.repository.UserRepository;
 import com.example.spotifyplaylistapp.service.UserService;
 import com.example.spotifyplaylistapp.util.LoggedUser;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -71,6 +78,43 @@ public class UserServiceImpl implements UserService {
         user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
         user.setEmail(registerDTO.getEmail());
 
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findUserById(Long id) {
+        return this.userRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public Set<SongDTO> getUserSongs(Long userId) {
+        User user = this.userRepository.findById(userId).orElse(null);
+
+        return user.getPlaylist()
+                .stream()
+                .map(s -> {
+                    SongDTO songDTO = new SongDTO();
+                    songDTO.setId(s.getId());
+                    songDTO.setTitle(s.getTitle());
+                    songDTO.setDuration(s.getDuration());
+                    songDTO.setPerformer(s.getPerformer());
+
+                    return songDTO;
+                })
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public void initUser() {
+        if (this.userRepository.count() > 1) {
+            return;
+        }
+
+        User user = new User();
+        user.setUsername("User");
+        user.setPassword(this.passwordEncoder.encode("12345"));
+        user.setEmail("user@abv.bg");
         this.userRepository.save(user);
     }
 }
