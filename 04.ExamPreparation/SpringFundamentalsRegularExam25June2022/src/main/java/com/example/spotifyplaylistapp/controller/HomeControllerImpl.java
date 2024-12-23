@@ -42,6 +42,12 @@ public class HomeControllerImpl implements HomeController {
         Set<SongDTO> userSongs = this.userService.getUserSongs(this.loggedUser.getId());
         model.addAttribute("userSongs", userSongs);
 
+        int totalSongsDuration = userSongs
+                .stream()
+                .mapToInt(SongDTO::getDuration)
+                .sum();
+
+        model.addAttribute("totalSongsDuration", totalSongsDuration);
 
         return "home";
     }
