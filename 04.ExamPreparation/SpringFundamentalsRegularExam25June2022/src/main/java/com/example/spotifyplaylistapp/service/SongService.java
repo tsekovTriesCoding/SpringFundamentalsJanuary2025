@@ -17,4 +17,8 @@ public interface SongService {
     Set<SongDTO> getAllJazzSongs();
 
     void addSong(AddSongDTO addSongDTO, Long userId);
+
+    void addSongToUserPlaylist(Long songId, Long userId);
+
+    void removeAllSongFromUserPlaylist(Long id);
 }

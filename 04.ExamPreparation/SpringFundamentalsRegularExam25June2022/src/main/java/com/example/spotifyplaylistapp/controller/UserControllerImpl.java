@@ -100,6 +100,12 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public String logout() {
-        return "";
+        if (!this.loggedUser.isLogged()) {
+            return "redirect:/users/login";
+        }
+
+        this.userService.logout();
+
+        return "redirect:/";
     }
 }

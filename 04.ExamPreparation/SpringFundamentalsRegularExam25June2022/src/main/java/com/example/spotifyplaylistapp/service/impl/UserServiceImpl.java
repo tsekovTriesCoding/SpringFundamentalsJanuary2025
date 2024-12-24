@@ -2,12 +2,12 @@ package com.example.spotifyplaylistapp.service.impl;
 
 import com.example.spotifyplaylistapp.model.dto.RegisterDTO;
 import com.example.spotifyplaylistapp.model.dto.SongDTO;
-import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.User;
 import com.example.spotifyplaylistapp.repository.UserRepository;
 import com.example.spotifyplaylistapp.service.UserService;
 import com.example.spotifyplaylistapp.util.LoggedUser;
 import com.example.spotifyplaylistapp.util.RoundDouble;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,13 +22,17 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final LoggedUser loggedUser;
+    private final HttpSession httpSession;
 
     @Autowired
     public UserServiceImpl(PasswordEncoder passwordEncoder,
-                           UserRepository userRepository, LoggedUser loggedUser) {
+                           UserRepository userRepository,
+                           LoggedUser loggedUser,
+                           HttpSession httpSession) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.loggedUser = loggedUser;
+        this.httpSession = httpSession;
     }
 
     @Override
@@ -120,5 +124,11 @@ public class UserServiceImpl implements UserService {
         user.setPassword(this.passwordEncoder.encode("12345"));
         user.setEmail("user@abv.bg");
         this.userRepository.save(user);
+    }
+
+    @Override
+    public void logout() {
+        this.httpSession.invalidate();
+        this.loggedUser.logout();
     }
 }

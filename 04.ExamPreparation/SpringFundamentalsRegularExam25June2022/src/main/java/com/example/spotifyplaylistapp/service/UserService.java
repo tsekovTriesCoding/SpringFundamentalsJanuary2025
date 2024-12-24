@@ -26,4 +26,6 @@ public interface UserService {
     Set<SongDTO> getUserSongs(Long id);
 
     void initUser();
+
+    void logout();
 }

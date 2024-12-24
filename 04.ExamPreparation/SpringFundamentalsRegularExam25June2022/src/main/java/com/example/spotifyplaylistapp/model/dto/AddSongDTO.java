@@ -1,6 +1,6 @@
 package com.example.spotifyplaylistapp.model.dto;
 
-import com.example.spotifyplaylistapp.model.entity.Style;
+import com.example.spotifyplaylistapp.model.enums.StyleEnum;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
@@ -19,23 +19,23 @@ public class AddSongDTO {
 
     @NotNull
     @Positive(message = "Duration must be positive!")
-    private Integer durationInSeconds;
+    private Integer duration;
 
     @PastOrPresent(message = "The date cannot be in the future ")
     private LocalDate releaseDate;
 
-    @NotNull(message = "You myst select a style!")
-    private Style style;
+    @NotNull(message = "You must select a style!")
+    private StyleEnum style;
 
     public AddSongDTO() {
     }
 
-    public Integer getDurationInSeconds() {
-        return durationInSeconds;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public AddSongDTO setDurationInSeconds(Integer durationInSeconds) {
-        this.durationInSeconds = durationInSeconds;
+    public AddSongDTO setDuration(Integer duration) {
+        this.duration = duration;
         return this;
     }
 
@@ -57,11 +57,11 @@ public class AddSongDTO {
         return this;
     }
 
-    public Style getStyle() {
+    public StyleEnum getStyle() {
         return style;
     }
 
-    public AddSongDTO setStyle(Style style) {
+    public AddSongDTO setStyle(StyleEnum style) {
         this.style = style;
         return this;
     }

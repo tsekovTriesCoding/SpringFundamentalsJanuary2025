@@ -43,7 +43,7 @@ public class SongServiceImpl implements SongService {
         User user = this.userRepository.findById(Long.parseLong("2")).orElse(null);
 
         Song adminSong1 = new Song()
-                .setDuration(3)
+                .setDuration(300)
                 .setPerformer("Ed Sheeran")
                 .setTitle("Shape of you")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.POP));
@@ -52,7 +52,7 @@ public class SongServiceImpl implements SongService {
         this.songRepository.save(adminSong1);
 
         Song adminSong2 = new Song()
-                .setDuration(5)
+                .setDuration(500)
                 .setPerformer("Керана и космонавтите")
                 .setTitle("Комедиантката")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.ROCK));
@@ -61,7 +61,7 @@ public class SongServiceImpl implements SongService {
         this.songRepository.save(adminSong2);
 
         Song adminSong3 = new Song()
-                .setDuration(5)
+                .setDuration(500)
                 .setPerformer("Miles Davis")
                 .setTitle("Blue In Green")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.JAZZ));
@@ -70,7 +70,7 @@ public class SongServiceImpl implements SongService {
         this.songRepository.save(adminSong3);
 
         Song userSong1 = new Song()
-                .setDuration(3)
+                .setDuration(320)
                 .setPerformer("Britney Spears")
                 .setTitle("Toxic")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.POP));
@@ -79,7 +79,7 @@ public class SongServiceImpl implements SongService {
         this.songRepository.save(userSong1);
 
         Song userSong2 = new Song()
-                .setDuration(3)
+                .setDuration(320)
                 .setPerformer("Графа")
                 .setTitle("Невидим")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.POP));
@@ -88,7 +88,7 @@ public class SongServiceImpl implements SongService {
         this.songRepository.save(userSong2);
 
         Song userSong3 = new Song()
-                .setDuration(4)
+                .setDuration(410)
                 .setPerformer("Queen")
                 .setTitle("Bohemian Rhapsody")
                 .setStyle(this.styleRepository.findByStyleName(StyleEnum.ROCK));
@@ -134,13 +134,33 @@ public class SongServiceImpl implements SongService {
     @Override
     public void addSong(AddSongDTO addSongDTO, Long userId) {
         Song song = new Song();
+        Style style = this.styleRepository.findByStyleName(addSongDTO.getStyle());
+
         song.setTitle(addSongDTO.getTitle());
-        song.setStyle(addSongDTO.getStyle());
+        song.setStyle(style);
         song.setPerformer(addSongDTO.getPerformer());
-        song.setStyle(addSongDTO.getStyle());
-        song.setDuration(addSongDTO.getDurationInSeconds());
+        song.setDuration(addSongDTO.getDuration());
 
         this.songRepository.save(song);
+    }
+
+    @Transactional
+    @Override
+    public void addSongToUserPlaylist(Long songId, Long userId) {
+        User user = this.userRepository.findById(userId).orElse(null);
+        Song song = this.songRepository.findById(songId).orElse(null);
+
+        user.getPlaylist().add(song);
+        this.songRepository.save(song);
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void removeAllSongFromUserPlaylist(Long id) {
+        User user = this.userRepository.findById(id).orElse(null);
+
+        user.setPlaylist(null);
+        this.userRepository.save(user);
     }
 
     private Set<SongDTO> mapSongs(List<Song> songs) {
@@ -150,6 +170,7 @@ public class SongServiceImpl implements SongService {
             double duration = (double)song.getDuration() / 60;
             duration = RoundDouble.round(duration, 2);
 
+            songDTO.setId(song.getId());
             songDTO.setTitle(song.getTitle());
             songDTO.setDuration(duration);
             songDTO.setPerformer(song.getPerformer());

@@ -48,4 +48,18 @@ public class SongControllerImpl implements SongController {
 
         return "redirect:/home";
     }
+
+    @Override
+    public String addSongToPlaylist(Long id) {
+        this.songService.addSongToUserPlaylist(id, this.loggedUser.getId());
+
+        return "redirect:/home";
+    }
+
+    @Override
+    public String removeAllSongsFromPlaylist() {
+        this.songService.removeAllSongFromUserPlaylist(this.loggedUser.getId());
+
+        return "redirect:/home";
+    }
 }
