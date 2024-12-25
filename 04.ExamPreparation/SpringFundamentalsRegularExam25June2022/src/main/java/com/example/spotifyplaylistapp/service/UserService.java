@@ -2,7 +2,6 @@ package com.example.spotifyplaylistapp.service;
 
 import com.example.spotifyplaylistapp.model.dto.RegisterDTO;
 import com.example.spotifyplaylistapp.model.dto.SongDTO;
-import com.example.spotifyplaylistapp.model.entity.Song;
 import com.example.spotifyplaylistapp.model.entity.User;
 
 import java.util.Optional;
