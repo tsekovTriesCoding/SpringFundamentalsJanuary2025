@@ -1,5 +1,6 @@
 package bg.softuni.springfundamentalsretakeexam15december2021.service.impl;
 
+import bg.softuni.springfundamentalsretakeexam15december2021.model.dto.AddProductDTO;
 import bg.softuni.springfundamentalsretakeexam15december2021.model.dto.ProductInfoDTO;
 import bg.softuni.springfundamentalsretakeexam15december2021.model.entity.Category;
 import bg.softuni.springfundamentalsretakeexam15december2021.model.entity.Product;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -106,6 +106,24 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductInfoDTO> getAllOtherProducts() {
         Category category = this.categoryRepository.getByName(CategoryEnum.OTHER);
         return getProductInfoDTOS(category);
+    }
+
+    @Override
+    public void addProduct(AddProductDTO addProductDTO) {
+        Product product = new Product();
+        Category category = this.categoryRepository.getByName(addProductDTO.getCategory());
+
+        product.setName(addProductDTO.getName());
+        product.setCategory(category);
+        product.setPrice(addProductDTO.getPrice());
+        product.setDescription(addProductDTO.getDescription());
+        product.setNeededBefore(addProductDTO.getNeededBefore());
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public Product getProductByName(String name) {
+        return this.productRepository.findByName(name).orElse(null);
     }
 
     private List<ProductInfoDTO> getProductInfoDTOS(Category name) {
