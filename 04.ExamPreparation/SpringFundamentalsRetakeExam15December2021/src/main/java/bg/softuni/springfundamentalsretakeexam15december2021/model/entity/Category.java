@@ -23,6 +23,10 @@ public class Category extends BaseEntity {
         this.products = new HashSet<>();
     }
 
+    public Category(CategoryEnum name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
