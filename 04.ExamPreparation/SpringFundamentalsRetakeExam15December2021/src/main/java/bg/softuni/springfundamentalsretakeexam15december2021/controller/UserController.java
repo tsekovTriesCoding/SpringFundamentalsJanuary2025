@@ -104,6 +104,12 @@ public class UserController {
 
     @GetMapping("/logout")
     String logout() {
-        return "logout";
+        if (!this.loggedUser.isLogged()) {
+            return "redirect:/users/login";
+        }
+
+        this.userService.logout();
+
+        return "redirect:/";
     }
 }

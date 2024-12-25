@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,8 +17,8 @@ public class Product extends BaseEntity {
     @Column
     private String description;
 
-    @Column
-    private Double price;
+    @Column(precision = 19, scale = 2)
+    private BigDecimal price;
 
     @Column(name = "needed_before")
     private LocalDateTime neededBefore;
@@ -64,11 +65,11 @@ public class Product extends BaseEntity {
         return this;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public Product setPrice(Double price) {
+    public Product setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }

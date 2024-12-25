@@ -17,4 +17,6 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void register(RegisterDTO registerDTO);
+
+    void logout();
 }

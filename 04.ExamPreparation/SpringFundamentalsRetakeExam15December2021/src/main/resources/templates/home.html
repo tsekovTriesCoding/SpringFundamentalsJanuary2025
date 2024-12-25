@@ -10,37 +10,45 @@
         <div class="row mt-3 mb-3">
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Foods</h3>
-                <div class="mt-3 rounded badge-info">
-                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
-                    <span>Name: {name} Price: {price} lv</span>
-                    <a class="ml-3 text-danger" href="/">Buy</a>
-                </div>
+                <th:block th:each="food : ${allFoodProducts}">
+                    <div class="mt-3 rounded badge-info">
+                        <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                        <span th:text="|Name: ${food.name} Price: ${food.price} lv|"></span>
+                        <a class="ml-3 text-danger" href="/">Buy</a>
+                    </div>
+                </th:block>
             </div>
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Drinks</h3>
-                <div class="mt-3 rounded badge-warning">
-                    <img class="mr-2" src="/img/drink.png" alt="Food" width="50px" height="50px">
-                    <span>Name: {name} Price: {price} lv</span>
-                    <a class="ml-3 text-danger" href="/">Buy</a>
-                </div>
+                <th:block th:each="drink: ${allDrinkProducts}">
+                    <div class="mt-3 rounded badge-warning">
+                        <img class="mr-2" src="/img/drink.png" alt="Food" width="50px" height="50px">
+                        <span th:text="|Name: ${drink.name} Price: ${drink.price} lv|"></span>
+                        <a class="ml-3 text-danger" href="/">Buy</a>
+                    </div>
+                </th:block>
             </div>
         </div>
         <div class="row mt-3 mb-3">
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Households</h3>
-                <div class="mt-3 rounded badge-success">
-                    <img class="mr-2" src="/img/household.png" alt="Food" width="50px" height="50px">
-                    <span>Name: {name} Price: {price} lv</span>
-                    <a class="ml-3 text-danger" href="/">Buy</a>
-                </div>
+                <th:block th:each="product : ${allHouseholdProducts}">
+                    <div class="mt-3 rounded badge-success">
+                        <img class="mr-2" src="/img/household.png" alt="Food" width="50px" height="50px">
+                        <span th:text="|Name: ${product.name} Price: ${product.price} lv|"></span>
+                        <a class="ml-3 text-danger" href="/">Buy</a>
+                    </div>
+                </th:block>
             </div>
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Other</h3>
-                <div class="mt-3 rounded badge-secondary">
-                    <img class="mr-2" src="/img/other.png" alt="Food" width="50px" height="50px">
-                    <span>Name: {name} Price: {price} lv</span>
-                    <a class="ml-3 text-danger" href="/">Buy</a>
-                </div>
+                <th:block th:each="other : ${allOtherProducts}">
+                    <div class="mt-3 rounded badge-secondary">
+                        <img class="mr-2" src="/img/other.png" alt="Food" width="50px" height="50px">
+                        <span th:text="|Name: ${other.name} Price: ${other.price} lv|"></span>
+                        <a class="ml-3 text-danger" href="/">Buy</a>
+                    </div>
+                </th:block>
             </div>
         </div>
         <a href="/" class="btn btn-danger">Buy all products for {totalPriceOfProducts} lv|</a>
