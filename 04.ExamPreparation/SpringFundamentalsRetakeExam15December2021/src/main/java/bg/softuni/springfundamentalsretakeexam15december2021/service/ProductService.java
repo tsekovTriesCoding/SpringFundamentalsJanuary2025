@@ -20,4 +20,10 @@ public interface ProductService {
     void addProduct(AddProductDTO addProductDTO);
 
     Product getProductByName(String name);
+
+    void buyProduct(Long productId);
+
+    List<Product> getAllProducts();
+
+    void buyAllProducts();
 }

@@ -126,11 +126,29 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.findByName(name).orElse(null);
     }
 
+    @Override
+    public void buyProduct(Long productId) {
+        Product product = this.productRepository.findById(productId).orElse(null);
+
+        this.productRepository.delete(product);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return this.productRepository.findAll();
+    }
+
+    @Override
+    public void buyAllProducts() {
+        this.productRepository.deleteAll();
+    }
+
     private List<ProductInfoDTO> getProductInfoDTOS(Category name) {
         List<Product> allProductsByCategory = this.productRepository.getAllByCategory(name);
 
         return allProductsByCategory.stream().map(product -> {
             ProductInfoDTO productInfoDTO = new ProductInfoDTO();
+            productInfoDTO.setId(product.getId());
             productInfoDTO.setName(product.getName());
             productInfoDTO.setPrice(product.getPrice());
             return productInfoDTO;

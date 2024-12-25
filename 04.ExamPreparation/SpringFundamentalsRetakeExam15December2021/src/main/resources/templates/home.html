@@ -14,7 +14,7 @@
                     <div class="mt-3 rounded badge-info">
                         <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
                         <span th:text="|Name: ${food.name} Price: ${food.price} lv|"></span>
-                        <a class="ml-3 text-danger" href="/">Buy</a>
+                        <a class="ml-3 text-danger" th:href="@{/products/buy-product/{id}(id=*{food.id})}">Buy</a>
                     </div>
                 </th:block>
             </div>
@@ -24,7 +24,7 @@
                     <div class="mt-3 rounded badge-warning">
                         <img class="mr-2" src="/img/drink.png" alt="Food" width="50px" height="50px">
                         <span th:text="|Name: ${drink.name} Price: ${drink.price} lv|"></span>
-                        <a class="ml-3 text-danger" href="/">Buy</a>
+                        <a class="ml-3 text-danger" th:href="@{/products/buy-product/{id}(id=*{drink.id})}">Buy</a>
                     </div>
                 </th:block>
             </div>
@@ -36,7 +36,7 @@
                     <div class="mt-3 rounded badge-success">
                         <img class="mr-2" src="/img/household.png" alt="Food" width="50px" height="50px">
                         <span th:text="|Name: ${product.name} Price: ${product.price} lv|"></span>
-                        <a class="ml-3 text-danger" href="/">Buy</a>
+                        <a class="ml-3 text-danger" th:href="@{/products/buy-product/{id}(id=*{product.id})}">Buy</a>
                     </div>
                 </th:block>
             </div>
@@ -46,12 +46,12 @@
                     <div class="mt-3 rounded badge-secondary">
                         <img class="mr-2" src="/img/other.png" alt="Food" width="50px" height="50px">
                         <span th:text="|Name: ${other.name} Price: ${other.price} lv|"></span>
-                        <a class="ml-3 text-danger" href="/">Buy</a>
+                        <a class="ml-3 text-danger" th:href="@{/products/buy-product/{id}(id=*{other.id})}">Buy</a>
                     </div>
                 </th:block>
             </div>
         </div>
-        <a href="/" class="btn btn-danger">Buy all products for {totalPriceOfProducts} lv|</a>
+        <a th:text="|Buy all products for *{sum} lv|" th:href="@{/products/buy-all-products}" class="btn btn-danger"></a>
     </div>
 </main>
 <footer th:replace="fragments/commons::footer"></footer>

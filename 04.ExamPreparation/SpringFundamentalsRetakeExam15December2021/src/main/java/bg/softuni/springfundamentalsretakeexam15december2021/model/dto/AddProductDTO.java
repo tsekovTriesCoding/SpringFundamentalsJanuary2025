@@ -1,6 +1,5 @@
 package bg.softuni.springfundamentalsretakeexam15december2021.model.dto;
 
-import bg.softuni.springfundamentalsretakeexam15december2021.model.entity.Category;
 import bg.softuni.springfundamentalsretakeexam15december2021.model.enums.CategoryEnum;
 import bg.softuni.springfundamentalsretakeexam15december2021.vallidation.annotation.UniqueProductName;
 import jakarta.validation.constraints.FutureOrPresent;
