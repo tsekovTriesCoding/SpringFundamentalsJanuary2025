@@ -1,5 +1,6 @@
 package bg.softuni.springfundamentalsretakeexam15december2021.service.impl;
 
+import bg.softuni.springfundamentalsretakeexam15december2021.model.dto.RegisterDTO;
 import bg.softuni.springfundamentalsretakeexam15december2021.model.entity.User;
 import bg.softuni.springfundamentalsretakeexam15december2021.repository.UserRepository;
 import bg.softuni.springfundamentalsretakeexam15december2021.service.UserService;
@@ -55,5 +56,33 @@ public class UserServiceImpl implements UserService {
         User user = this.getUserByUsername(username);
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
+    }
+
+    @Override
+    public void initUser() {
+        if (this.userRepository.count() > 1) {
+            return;
+        }
+
+        User user = new User();
+        user.setUsername("User");
+        user.setPassword(this.passwordEncoder.encode("12345"));
+        user.setEmail("user@abv.bg");
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }

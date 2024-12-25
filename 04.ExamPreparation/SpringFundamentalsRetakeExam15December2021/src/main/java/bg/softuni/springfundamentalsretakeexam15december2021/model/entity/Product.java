@@ -13,7 +13,7 @@ public class Product extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String description;
 
     @Column
