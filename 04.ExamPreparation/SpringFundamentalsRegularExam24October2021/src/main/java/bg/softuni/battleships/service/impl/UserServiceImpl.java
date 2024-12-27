@@ -1,5 +1,6 @@
 package bg.softuni.battleships.service.impl;
 
+import bg.softuni.battleships.model.dto.RegisterDTO;
 import bg.softuni.battleships.model.entity.User;
 import bg.softuni.battleships.repository.UserRepository;
 import bg.softuni.battleships.service.UserService;
@@ -56,5 +57,21 @@ public class UserServiceImpl implements UserService {
         User user = this.getUserByUsername(username);
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFullName());
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }

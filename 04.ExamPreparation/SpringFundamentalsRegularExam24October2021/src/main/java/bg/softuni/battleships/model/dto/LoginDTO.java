@@ -8,7 +8,7 @@ public class LoginDTO {
     @NotNull
     private String username;
 
-    @Size(min = 3, message = "Password length must be more than 3 characters!")
+    @Size(min = 3, message = "Password length must be more than 3 characters.")
     @NotNull
     private String password;
 
