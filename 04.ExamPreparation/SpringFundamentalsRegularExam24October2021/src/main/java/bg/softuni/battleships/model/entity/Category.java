@@ -1,4 +1,4 @@
-package bg.softuni.battleships.model;
+package bg.softuni.battleships.model.entity;
 
 import bg.softuni.battleships.model.enums.CategoryEnum;
 import jakarta.persistence.*;

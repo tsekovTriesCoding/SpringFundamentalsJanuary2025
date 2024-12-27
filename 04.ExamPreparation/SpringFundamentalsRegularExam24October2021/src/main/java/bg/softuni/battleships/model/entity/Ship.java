@@ -1,4 +1,4 @@
-package bg.softuni.battleships.model;
+package bg.softuni.battleships.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package bg.softuni.battleships.model;
+package bg.softuni.battleships.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

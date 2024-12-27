@@ -1,6 +1,6 @@
 package bg.softuni.battleships.service.impl;
 
-import bg.softuni.battleships.model.Category;
+import bg.softuni.battleships.model.entity.Category;
 import bg.softuni.battleships.model.enums.CategoryEnum;
 import bg.softuni.battleships.repository.CategoryRepository;
 import bg.softuni.battleships.service.CategoryService;
