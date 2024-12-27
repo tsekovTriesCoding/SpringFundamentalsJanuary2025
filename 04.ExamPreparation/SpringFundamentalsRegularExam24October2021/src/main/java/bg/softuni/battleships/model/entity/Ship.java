@@ -84,4 +84,8 @@ public class Ship extends BaseEntity {
         this.user = user;
         return this;
     }
+
+    public void takeDamage(Long damage) {
+        this.health -= damage;
+    }
 }

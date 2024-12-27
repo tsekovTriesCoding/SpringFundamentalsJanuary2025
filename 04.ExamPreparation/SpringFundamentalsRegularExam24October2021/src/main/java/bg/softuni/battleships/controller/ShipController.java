@@ -1,6 +1,7 @@
 package bg.softuni.battleships.controller;
 
 import bg.softuni.battleships.model.dto.AddShipDTO;
+import bg.softuni.battleships.model.dto.ShipAttackNamesDTO;
 import bg.softuni.battleships.service.ShipService;
 import bg.softuni.battleships.util.LoggedUser;
 import jakarta.validation.Valid;
@@ -48,6 +49,13 @@ public class ShipController {
         }
 
         this.shipService.addShip(addShipDTO, this.loggedUser.getId());
+
+        return "redirect:/home";
+    }
+
+    @PostMapping("/fire")
+    public String fire(ShipAttackNamesDTO shipAttackNamesDTO) {
+        this.shipService.engage(shipAttackNamesDTO.getAttackerName(), shipAttackNamesDTO.getDefenderName());
 
         return "redirect:/home";
     }
