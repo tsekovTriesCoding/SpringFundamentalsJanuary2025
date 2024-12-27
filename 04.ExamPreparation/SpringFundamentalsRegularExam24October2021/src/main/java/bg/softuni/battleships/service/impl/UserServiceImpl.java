@@ -7,6 +7,7 @@ import bg.softuni.battleships.model.entity.User;
 import bg.softuni.battleships.repository.UserRepository;
 import bg.softuni.battleships.service.UserService;
 import bg.softuni.battleships.util.LoggedUser;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final HttpSession httpSession;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           LoggedUser loggedUser) {
+                           LoggedUser loggedUser,
+                           HttpSession httpSession) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.httpSession = httpSession;
     }
 
     @Override
@@ -127,5 +131,11 @@ public class UserServiceImpl implements UserService {
         });
 
         return otherUsersShips;
+    }
+
+    @Override
+    public void logout() {
+        this.httpSession.invalidate();
+        this.loggedUser.logout();
     }
 }
