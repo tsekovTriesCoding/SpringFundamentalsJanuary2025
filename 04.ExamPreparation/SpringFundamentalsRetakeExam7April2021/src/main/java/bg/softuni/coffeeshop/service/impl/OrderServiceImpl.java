@@ -4,12 +4,15 @@ import bg.softuni.coffeeshop.model.Category;
 import bg.softuni.coffeeshop.model.Order;
 import bg.softuni.coffeeshop.model.User;
 import bg.softuni.coffeeshop.model.dto.AddOrderDTO;
+import bg.softuni.coffeeshop.model.enums.CategoryEnum;
 import bg.softuni.coffeeshop.repository.CategoryRepository;
 import bg.softuni.coffeeshop.repository.OrderRepository;
 import bg.softuni.coffeeshop.repository.UserRepository;
 import bg.softuni.coffeeshop.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -41,5 +44,29 @@ public class OrderServiceImpl implements OrderService {
 
         this.orderRepository.save(order);
         user.getOrders().add(order);
+    }
+
+    @Override
+    public Set<Order> getAllCoffeeOrders() {
+        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.COFFEE);
+        return this.orderRepository.getAllByCategory(category);
+    }
+
+    @Override
+    public Set<Order> getAllCakeOrders() {
+        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.CAKE);
+        return this.orderRepository.getAllByCategory(category);
+    }
+
+    @Override
+    public Set<Order> getAllDrinkOrders() {
+        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.DRINK);
+        return this.orderRepository.getAllByCategory(category);
+    }
+
+    @Override
+    public Set<Order> getAllOtherOrders() {
+        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.OTHER);
+        return this.orderRepository.getAllByCategory(category);
     }
 }
