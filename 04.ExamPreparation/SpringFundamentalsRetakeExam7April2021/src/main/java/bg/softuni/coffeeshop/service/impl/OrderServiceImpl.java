@@ -59,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
                     orderShortInfoDTO.setName(o.getName());
                     orderShortInfoDTO.setPrice(o.getPrice());
                     orderShortInfoDTO.setCategory(o.getCategory());
+                    orderShortInfoDTO.setOrderTime(o.getOrderTime());
                     return orderShortInfoDTO;
                 }).collect(Collectors.toSet());
     }

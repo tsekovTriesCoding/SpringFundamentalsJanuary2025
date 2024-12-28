@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -50,6 +51,12 @@ public class HomeController {
                 .sorted(Comparator.comparing(OrderShortInfoDTO::getPrice).reversed())
                 .collect(Collectors.toCollection(LinkedHashSet::new));
         model.addAttribute("allOrders", allOrders);
+
+        int totalTime = allOrders.stream().map(OrderShortInfoDTO::getOrderTime)
+                .map(i -> LocalDateTime.now().getMinute() - i.getMinute())
+                .mapToInt(i -> i)
+                .sum();
+        model.addAttribute("totalTime", totalTime);
 
         Set<EmployeeDTO> employees = this.userService.getAllEmployees()
                 .stream()

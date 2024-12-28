@@ -3,12 +3,14 @@ package bg.softuni.coffeeshop.model.dto;
 import bg.softuni.coffeeshop.model.entity.Category;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class OrderShortInfoDTO {
     private Long id;
     private String name;
     private BigDecimal price;
     private Category category;
+    private LocalDateTime orderTime;
 
     public OrderShortInfoDTO() {
     }
@@ -46,6 +48,15 @@ public class OrderShortInfoDTO {
 
     public OrderShortInfoDTO setCategory(Category category) {
         this.category = category;
+        return this;
+    }
+
+    public LocalDateTime getOrderTime() {
+        return orderTime;
+    }
+
+    public OrderShortInfoDTO setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
         return this;
     }
 }
