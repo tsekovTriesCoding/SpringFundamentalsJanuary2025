@@ -1,4 +1,4 @@
-package com.dictionaryapp.service;
+package com.dictionaryapp.util;
 
 import com.dictionaryapp.model.entity.User;
 import org.springframework.stereotype.Component;

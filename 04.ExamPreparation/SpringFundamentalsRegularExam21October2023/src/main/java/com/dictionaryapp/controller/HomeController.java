@@ -1,10 +1,9 @@
 package com.dictionaryapp.controller;
 
 import com.dictionaryapp.model.entity.Word;
-import com.dictionaryapp.service.LoggedUser;
+import com.dictionaryapp.util.LoggedUser;
 import com.dictionaryapp.service.UserService;
 import com.dictionaryapp.service.WordService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ public class HomeController {
     private final WordService wordService;
     private final UserService userService;
 
-    @Autowired
     public HomeController(LoggedUser loggedUser, WordService wordService, UserService userService) {
         this.loggedUser = loggedUser;
         this.wordService = wordService;

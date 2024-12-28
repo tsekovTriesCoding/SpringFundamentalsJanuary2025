@@ -4,7 +4,7 @@ import com.dictionaryapp.model.dto.UserLoginDTO;
 import com.dictionaryapp.model.dto.UserRegisterDTO;
 import com.dictionaryapp.model.entity.User;
 import com.dictionaryapp.repo.UserRepository;
-import com.dictionaryapp.service.LoggedUser;
+import com.dictionaryapp.util.LoggedUser;
 import com.dictionaryapp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;

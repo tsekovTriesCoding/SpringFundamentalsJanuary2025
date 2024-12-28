@@ -2,7 +2,7 @@ package com.dictionaryapp.controller;
 
 import com.dictionaryapp.model.dto.AddWordDTO;
 import com.dictionaryapp.model.enums.LanguageEnum;
-import com.dictionaryapp.service.LoggedUser;
+import com.dictionaryapp.util.LoggedUser;
 import com.dictionaryapp.service.WordService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ public class WordController {
     private final WordService wordService;
     private final LoggedUser loggedUser;
 
-    @Autowired
     public WordController(WordService wordService, LoggedUser loggedUser) {
         this.wordService = wordService;
         this.loggedUser = loggedUser;

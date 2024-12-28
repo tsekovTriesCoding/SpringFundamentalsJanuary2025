@@ -25,7 +25,6 @@ public class WordServiceImpl implements WordService {
     private final UserService userService;
     private  final LanguageService languageService;
 
-    @Autowired
     public WordServiceImpl(WordRepository wordRepository,
                            UserRepository userRepository,
                            LanguageRepository languageRepository,
