@@ -1,18 +1,14 @@
 package bg.softuni.coffeeshop.service;
 
-import bg.softuni.coffeeshop.model.Order;
 import bg.softuni.coffeeshop.model.dto.AddOrderDTO;
+import bg.softuni.coffeeshop.model.dto.OrderShortInfoDTO;
 
 import java.util.Set;
 
 public interface OrderService {
     void add(AddOrderDTO addOrderDTO, Long id);
 
-    Set<Order> getAllCoffeeOrders();
+    Set<OrderShortInfoDTO> getAll();
 
-    Set<Order> getAllCakeOrders();
-
-    Set<Order> getAllDrinkOrders();
-
-    Set<Order> getAllOtherOrders();
+    void remove(Long orderId);
 }

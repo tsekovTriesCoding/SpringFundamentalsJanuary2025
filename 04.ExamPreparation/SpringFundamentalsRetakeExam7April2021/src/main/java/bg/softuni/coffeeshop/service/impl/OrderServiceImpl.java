@@ -1,10 +1,10 @@
 package bg.softuni.coffeeshop.service.impl;
 
-import bg.softuni.coffeeshop.model.Category;
-import bg.softuni.coffeeshop.model.Order;
-import bg.softuni.coffeeshop.model.User;
 import bg.softuni.coffeeshop.model.dto.AddOrderDTO;
-import bg.softuni.coffeeshop.model.enums.CategoryEnum;
+import bg.softuni.coffeeshop.model.dto.OrderShortInfoDTO;
+import bg.softuni.coffeeshop.model.entity.Category;
+import bg.softuni.coffeeshop.model.entity.Order;
+import bg.softuni.coffeeshop.model.entity.User;
 import bg.softuni.coffeeshop.repository.CategoryRepository;
 import bg.softuni.coffeeshop.repository.OrderRepository;
 import bg.softuni.coffeeshop.repository.UserRepository;
@@ -12,7 +12,9 @@ import bg.softuni.coffeeshop.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -47,26 +49,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<Order> getAllCoffeeOrders() {
-        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.COFFEE);
-        return this.orderRepository.getAllByCategory(category);
+    public Set<OrderShortInfoDTO> getAll() {
+        List<Order> allOrders = this.orderRepository.findAll();
+
+        return allOrders.stream()
+                .map(o -> {
+                    OrderShortInfoDTO orderShortInfoDTO = new OrderShortInfoDTO();
+                    orderShortInfoDTO.setId(o.getId());
+                    orderShortInfoDTO.setName(o.getName());
+                    orderShortInfoDTO.setPrice(o.getPrice());
+                    orderShortInfoDTO.setCategory(o.getCategory());
+                    return orderShortInfoDTO;
+                }).collect(Collectors.toSet());
     }
 
+    @Transactional
     @Override
-    public Set<Order> getAllCakeOrders() {
-        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.CAKE);
-        return this.orderRepository.getAllByCategory(category);
-    }
+    public void remove(Long orderId) {
+        Order order = this.orderRepository.findById(orderId).orElse(null);
+        order.getEmployee().getOrders().remove(order);
 
-    @Override
-    public Set<Order> getAllDrinkOrders() {
-        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.DRINK);
-        return this.orderRepository.getAllByCategory(category);
-    }
-
-    @Override
-    public Set<Order> getAllOtherOrders() {
-        Category category = this.categoryRepository.getCategoryByName(CategoryEnum.OTHER);
-        return this.orderRepository.getAllByCategory(category);
+        this.orderRepository.delete(order);
     }
 }

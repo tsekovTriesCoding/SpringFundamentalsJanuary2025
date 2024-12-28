@@ -1,7 +1,7 @@
 package bg.softuni.coffeeshop.repository;
 
-import bg.softuni.coffeeshop.model.Category;
-import bg.softuni.coffeeshop.model.Order;
+import bg.softuni.coffeeshop.model.entity.Category;
+import bg.softuni.coffeeshop.model.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

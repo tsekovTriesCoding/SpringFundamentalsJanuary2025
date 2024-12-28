@@ -1,7 +1,10 @@
 package bg.softuni.coffeeshop.service;
 
-import bg.softuni.coffeeshop.model.User;
+import bg.softuni.coffeeshop.model.entity.User;
+import bg.softuni.coffeeshop.model.dto.EmployeeDTO;
 import bg.softuni.coffeeshop.model.dto.RegisterDTO;
+
+import java.util.Set;
 
 public interface UserService {
     boolean checkCredentials(String username, String password);
@@ -15,4 +18,6 @@ public interface UserService {
     User getUserByEmail(String value);
 
     void register(RegisterDTO registerDTO);
+
+    Set<EmployeeDTO> getAllEmployees();
 }

@@ -1,6 +1,6 @@
 package bg.softuni.coffeeshop.service.impl;
 
-import bg.softuni.coffeeshop.model.Category;
+import bg.softuni.coffeeshop.model.entity.Category;
 import bg.softuni.coffeeshop.model.enums.CategoryEnum;
 import bg.softuni.coffeeshop.repository.CategoryRepository;
 import bg.softuni.coffeeshop.service.CategoryService;
