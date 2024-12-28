@@ -1,4 +1,4 @@
-package bg.softuni.coffeeshop.model;
+package bg.softuni.coffeeshop.model.entity;
 
 import bg.softuni.coffeeshop.model.enums.CategoryEnum;
 import jakarta.persistence.*;

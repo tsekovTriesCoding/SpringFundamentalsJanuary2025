@@ -1,4 +1,4 @@
-package bg.softuni.coffeeshop.model;
+package bg.softuni.coffeeshop.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
