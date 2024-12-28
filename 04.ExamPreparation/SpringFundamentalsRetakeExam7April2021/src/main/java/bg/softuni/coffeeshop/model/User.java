@@ -2,7 +2,11 @@ package bg.softuni.coffeeshop.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,7 +26,11 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "employee")
+    private Set<Order> orders;
+
     public User() {
+        this.orders = new HashSet<>();
     }
 
     public String getEmail() {
@@ -67,6 +75,15 @@ public class User extends BaseEntity {
 
     public User setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public User setOrders(Set<Order> orders) {
+        this.orders = orders;
         return this;
     }
 }

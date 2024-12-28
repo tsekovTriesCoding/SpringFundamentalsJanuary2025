@@ -1,6 +1,7 @@
 package bg.softuni.coffeeshop.service.impl;
 
 import bg.softuni.coffeeshop.model.User;
+import bg.softuni.coffeeshop.model.dto.RegisterDTO;
 import bg.softuni.coffeeshop.repository.UserRepository;
 import bg.softuni.coffeeshop.service.UserService;
 import bg.softuni.coffeeshop.util.LoggedUser;
@@ -58,5 +59,22 @@ public class UserServiceImpl implements UserService {
         admin.setEmail("admin@abv.bg");
 
         this.userRepository.save(admin);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFirstName(registerDTO.getFirstName());
+        user.setLastName(registerDTO.getLastName());
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }
