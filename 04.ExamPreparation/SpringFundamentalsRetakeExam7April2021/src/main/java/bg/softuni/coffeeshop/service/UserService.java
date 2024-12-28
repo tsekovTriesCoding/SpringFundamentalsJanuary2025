@@ -20,4 +20,6 @@ public interface UserService {
     void register(RegisterDTO registerDTO);
 
     Set<EmployeeDTO> getAllEmployees();
+
+    void logout();
 }

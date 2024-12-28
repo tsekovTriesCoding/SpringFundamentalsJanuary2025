@@ -6,6 +6,7 @@ import bg.softuni.coffeeshop.model.dto.RegisterDTO;
 import bg.softuni.coffeeshop.repository.UserRepository;
 import bg.softuni.coffeeshop.service.UserService;
 import bg.softuni.coffeeshop.util.LoggedUser;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final HttpSession httpSession;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           LoggedUser loggedUser) {
+                           LoggedUser loggedUser,
+                           HttpSession httpSession) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.httpSession = httpSession;
     }
 
     @Override
@@ -96,6 +100,12 @@ public class UserServiceImpl implements UserService {
                     employeeDTO.setNumberOfOrders(u.getOrders().size());
                     return employeeDTO;
                 }).collect(Collectors.toSet());
+    }
+
+    @Override
+    public void logout() {
+        this.httpSession.invalidate();
+        this.loggedUser.logout();
     }
 
 }
