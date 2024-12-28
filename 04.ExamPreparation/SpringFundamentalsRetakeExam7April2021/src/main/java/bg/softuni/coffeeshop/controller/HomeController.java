@@ -38,11 +38,11 @@ public class HomeController {
             return "redirect:/";
         }
 
-        Set<Order> allCakeOrders = this.orderService.getAllCakeOrders();
-        model.addAttribute("allCakeOrders", allCakeOrders);
-
-        Set<Order> allDrinkOrders = this.orderService.getAllDrinkOrders();
-        model.addAttribute("allDrinkOrders", allDrinkOrders);
+        List<Order> allOrders = this.orderService.getAll()
+                .stream()
+                .sorted(Comparator.comparing(Order::getPrice).reversed())
+                .toList();
+        model.addAttribute("allOrders", allOrders);
 
         Set<Order> allOtherOrders = this.orderService.getAllOtherOrders();
         model.addAttribute("allOtherOrders", allOtherOrders);
