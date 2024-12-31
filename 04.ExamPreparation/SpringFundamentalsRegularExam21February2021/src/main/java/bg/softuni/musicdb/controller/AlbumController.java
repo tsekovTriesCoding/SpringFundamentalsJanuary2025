@@ -60,5 +60,10 @@ public class AlbumController {
         this.albumService.add(addAlbumDTO, this.loggedUser.getId());
         return "redirect:/home";
     }
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id) {
+        this.albumService.remove(id);
 
+        return "redirect:/home";
+    }
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class AlbumShortInfoDTO {
+    private Long id;
     private String name;
     private String imageUrl;
     private String artist;
@@ -13,6 +14,15 @@ public class AlbumShortInfoDTO {
     private BigDecimal price;
 
     public AlbumShortInfoDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public AlbumShortInfoDTO setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getArtist() {

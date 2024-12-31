@@ -11,4 +11,6 @@ public interface AlbumService {
     Set<AlbumShortInfoDTO> getAll();
 
     void initAlbums();
+
+    void remove(Long albumId);
 }

@@ -62,6 +62,7 @@ public class AlbumServiceImpl implements AlbumService {
                 .sorted(Comparator.comparingInt(Album::getCopies).reversed())
                 .map(a -> {
                     AlbumShortInfoDTO albumShortInfoDTO = new AlbumShortInfoDTO();
+                    albumShortInfoDTO.setId(a.getId());
                     albumShortInfoDTO.setName(a.getName());
                     albumShortInfoDTO.setArtist(a.getArtist().getName().getValue());
                     albumShortInfoDTO.setGenre(a.getGenre().getValue());
@@ -118,7 +119,7 @@ public class AlbumServiceImpl implements AlbumService {
         album3.setGenre(GenreEnum.POP);
         album3.setPrice(BigDecimal.valueOf(19));
         album3.setReleaseDate(LocalDate.of(2019, 7, 18));
-        album3.setCopies(2000000);
+        album3.setCopies(500000);
         album3.setAddedFrom(user);
         album3.setDescription("Ride The Lightning");
         album3.setImageUrl("/img/madonna.jpg");
@@ -131,11 +132,16 @@ public class AlbumServiceImpl implements AlbumService {
         album4.setGenre(GenreEnum.METAL);
         album4.setPrice(BigDecimal.valueOf(19));
         album4.setReleaseDate(LocalDate.of(2020, 9, 28));
-        album4.setCopies(2000000);
+        album4.setCopies(237199);
         album4.setAddedFrom(user);
         album4.setDescription("Ride The Lightning");
         album4.setImageUrl("/img/metallica.jpg");
 
         this.albumRepository.save(album4);
+    }
+
+    @Override
+    public void remove(Long albumId) {
+        this.albumRepository.deleteById(albumId);
     }
 }

@@ -40,6 +40,9 @@ public class HomeController {
         Set<AlbumShortInfoDTO> allAlbums = this.albumService.getAll();
         model.addAttribute("allAlbums", allAlbums);
 
+        int albumsCount = allAlbums.stream().mapToInt(AlbumShortInfoDTO::getCopies).sum();
+        model.addAttribute("albumsCount", albumsCount);
+
         return "home";
     }
 }
