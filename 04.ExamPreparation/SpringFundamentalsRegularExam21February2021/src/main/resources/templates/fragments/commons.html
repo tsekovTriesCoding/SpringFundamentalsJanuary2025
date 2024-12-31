@@ -23,7 +23,7 @@
                 <li th:unless="${@loggedUser.isLogged()}" class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" th:href="@{/users/register}">Register</a>
                 </li>
-                <li th:if="${@loggedUser.isLogged()}"class="nav-item col-md-4">
+                <li th:if="${@loggedUser.isLogged()}" class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" th:href="@{/albums/add}">Add Album</a>
                 </li>
                 <li th:if="${@loggedUser.isLogged()}" class="nav-item col-md-4">

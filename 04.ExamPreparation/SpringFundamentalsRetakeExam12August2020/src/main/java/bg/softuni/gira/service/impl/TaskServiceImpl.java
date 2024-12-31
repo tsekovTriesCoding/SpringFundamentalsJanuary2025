@@ -1,5 +1,6 @@
 package bg.softuni.gira.service.impl;
 
+import bg.softuni.gira.model.dto.AddTaskDTO;
 import bg.softuni.gira.model.dto.TaskInfoDTO;
 import bg.softuni.gira.model.entity.Classification;
 import bg.softuni.gira.model.entity.Task;
@@ -114,5 +115,26 @@ public class TaskServiceImpl implements TaskService {
         } else if (task.getProgress() == Progress.COMPLETED) {
             this.taskRepository.delete(task);
         }
+    }
+
+    @Override
+    public void add(AddTaskDTO addTaskDTO, Long userId) {
+        User user = this.userRepository.findById(userId).orElse(null);
+        Classification classification = this.classificationRepository.findByName(addTaskDTO.getClassification())
+                .orElse(null);
+
+        Task task = new Task();
+        task.setName(addTaskDTO.getName());
+        task.setUser(user);
+        task.setProgress(Progress.OPEN);
+        task.setDueDate(addTaskDTO.getDueDate());
+        task.setDescription(addTaskDTO.getDescription());
+        task.setClassification(classification);
+        this.taskRepository.save(task);
+    }
+
+    @Override
+    public Task getByName(String value) {
+        return this.taskRepository.findByName(value).orElse(null);
     }
 }

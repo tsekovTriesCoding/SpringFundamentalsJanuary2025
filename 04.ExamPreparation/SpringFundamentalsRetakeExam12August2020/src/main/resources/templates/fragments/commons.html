@@ -19,17 +19,17 @@
         <a class="navbar-brand active col-md-1 title" href="/">Gira</a>
         <div class="collapse navbar-collapse  d-flex justify-content-end">
             <ul class="navbar-nav row">
-                <li class="nav-item col-md-5">
+                <li th:unless="${@loggedUser.isLogged()}" class="nav-item col-md-5">
                     <a class="button" th:href="@{/users/login}">Login</a>
                 </li>
-                <li class="nav-item col-md-5">
+                <li th:unless="${@loggedUser.isLogged()}" class="nav-item col-md-5">
                     <a class="button" th:href="@{/users/register}">Register</a>
                 </li>
-                <li class="nav-item col-md-6">
-                    <a class="button text-nowrap" href="/">Add Task</a>
+                <li th:if="${@loggedUser.isLogged()}" class="nav-item col-md-6">
+                    <a class="button text-nowrap" th:href="@{/tasks/add}">Add Task</a>
                 </li>
-                <li class="nav-item col-md-5">
-                    <a class="button" href="/">Logout</a>
+                <li th:if="${@loggedUser.isLogged()}" class="nav-item col-md-5">
+                    <a class="button" th:href="@{/users/logout}">Logout</a>
                 </li>
             </ul>
         </div>

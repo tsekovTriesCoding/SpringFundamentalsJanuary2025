@@ -11,7 +11,7 @@ public class Task extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
