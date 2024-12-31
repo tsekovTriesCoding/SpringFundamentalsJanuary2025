@@ -35,4 +35,9 @@ public class ArtistServiceImpl implements ArtistService {
         });
 
     }
+
+    @Override
+    public Artist getByName(ArtistNameEnum artist) {
+        return this.artistRepository.findByName(artist).orElse(null);
+    }
 }
