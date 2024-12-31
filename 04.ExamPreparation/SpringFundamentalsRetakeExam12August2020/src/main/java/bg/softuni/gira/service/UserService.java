@@ -15,4 +15,6 @@ public interface UserService {
     void initAdmin();
 
     void register(RegisterDTO registerDTO);
+
+    void logout();
 }
