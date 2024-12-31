@@ -16,6 +16,10 @@ public class Classification extends BaseEntity {
     public Classification() {
     }
 
+    public Classification(ClassificationEnum name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
