@@ -14,11 +14,11 @@ public class Task extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String description;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Progress progress;
 
-    @Column(name = "due_date", unique = true, nullable = false)
+    @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
     @ManyToOne(optional = false)
