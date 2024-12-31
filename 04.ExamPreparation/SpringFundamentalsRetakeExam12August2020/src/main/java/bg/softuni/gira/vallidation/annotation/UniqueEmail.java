@@ -1,6 +1,6 @@
-package bg.softuni.musicdb.vallidation.annotation;
+package bg.softuni.gira.vallidation.annotation;
 
-import bg.softuni.musicdb.vallidation.UniqueEmailValidator;
+import bg.softuni.gira.vallidation.UniqueEmailValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

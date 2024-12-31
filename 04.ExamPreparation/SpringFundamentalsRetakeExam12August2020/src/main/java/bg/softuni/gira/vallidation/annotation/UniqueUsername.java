@@ -1,17 +1,17 @@
-package bg.softuni.musicdb.vallidation.annotation;
+package bg.softuni.gira.vallidation.annotation;
 
-import bg.softuni.musicdb.vallidation.UniqueEmailValidator;
+import bg.softuni.gira.vallidation.UniqueUsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniqueUsernameValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueEmail {
-    String message() default "Email already exist";
+public @interface UniqueUsername {
+    String message() default "Username already exist";
 
     Class<?>[] groups() default {};
 

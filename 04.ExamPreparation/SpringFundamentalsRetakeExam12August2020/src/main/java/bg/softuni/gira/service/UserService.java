@@ -1,5 +1,6 @@
 package bg.softuni.gira.service;
 
+import bg.softuni.gira.model.dto.RegisterDTO;
 import bg.softuni.gira.model.entity.User;
 
 public interface UserService {
@@ -12,4 +13,6 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void initAdmin();
+
+    void register(RegisterDTO registerDTO);
 }

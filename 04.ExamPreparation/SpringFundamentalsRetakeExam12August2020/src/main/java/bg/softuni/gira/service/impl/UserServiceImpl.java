@@ -1,5 +1,6 @@
 package bg.softuni.gira.service.impl;
 
+import bg.softuni.gira.model.dto.RegisterDTO;
 import bg.softuni.gira.model.entity.User;
 import bg.softuni.gira.repository.UserRepository;
 import bg.softuni.gira.service.UserService;
@@ -61,5 +62,15 @@ public class UserServiceImpl implements UserService {
         admin.setEmail("admin@abv.bg");
 
         this.userRepository.save(admin);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }
