@@ -1,4 +1,4 @@
-package bg.softuni.gira.model;
+package bg.softuni.gira.model.entity;
 
 import bg.softuni.gira.model.enums.Progress;
 import jakarta.persistence.*;

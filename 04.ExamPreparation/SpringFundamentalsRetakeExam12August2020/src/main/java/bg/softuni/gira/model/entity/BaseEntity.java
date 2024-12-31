@@ -1,4 +1,4 @@
-package bg.softuni.gira.model;
+package bg.softuni.gira.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -1,6 +1,6 @@
 package bg.softuni.gira.repository;
 
-import bg.softuni.gira.model.Classification;
+import bg.softuni.gira.model.entity.Classification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

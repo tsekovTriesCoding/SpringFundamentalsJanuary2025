@@ -1,6 +1,6 @@
 package bg.softuni.gira.service.impl;
 
-import bg.softuni.gira.model.Classification;
+import bg.softuni.gira.model.entity.Classification;
 import bg.softuni.gira.model.enums.ClassificationEnum;
 import bg.softuni.gira.repository.ClassificationRepository;
 import bg.softuni.gira.service.ClassificationService;
