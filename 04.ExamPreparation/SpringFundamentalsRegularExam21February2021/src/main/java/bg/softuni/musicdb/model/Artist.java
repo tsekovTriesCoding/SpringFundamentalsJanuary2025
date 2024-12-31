@@ -10,7 +10,7 @@ public class Artist extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ArtistNameEnum name;
 
-    @Column(name = "career_information")
+    @Column(name = "career_information",columnDefinition = "TEXT")
     private String careerInformation;
 
     public Artist() {
