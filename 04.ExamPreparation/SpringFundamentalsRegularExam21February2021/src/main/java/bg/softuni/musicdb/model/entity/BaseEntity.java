@@ -1,4 +1,4 @@
-package bg.softuni.musicdb.model;
+package bg.softuni.musicdb.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

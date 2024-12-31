@@ -1,6 +1,6 @@
 package bg.softuni.musicdb.repository;
 
-import bg.softuni.musicdb.model.Artist;
+import bg.softuni.musicdb.model.entity.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package bg.softuni.musicdb.service.impl;
 
-import bg.softuni.musicdb.model.Artist;
+import bg.softuni.musicdb.model.entity.Artist;
 import bg.softuni.musicdb.model.enums.ArtistNameEnum;
 import bg.softuni.musicdb.repository.ArtistRepository;
 import bg.softuni.musicdb.service.ArtistService;

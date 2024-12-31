@@ -1,4 +1,4 @@
-package bg.softuni.musicdb.model;
+package bg.softuni.musicdb.model.entity;
 
 import bg.softuni.musicdb.model.enums.ArtistNameEnum;
 import jakarta.persistence.*;
