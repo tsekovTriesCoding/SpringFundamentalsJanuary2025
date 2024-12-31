@@ -1,12 +1,14 @@
 package bg.softuni.gira.model.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class LoginDTO {
-    @Size(min = 5, max = 20, message = "Email length must be between 3 and 20 characters")
-    @NotBlank(message = "Email can't be empty!")
+
+    @NotBlank(message = "Email cannot be empty!")
+    @Email
     private String email;
 
     @Size(min = 3, message = "Password length must be between 3 and 20 characters")
