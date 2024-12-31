@@ -1,7 +1,7 @@
-package bg.softuni.coffeeshop.vallidation;
+package bg.softuni.musicdb.vallidation;
 
-import bg.softuni.coffeeshop.service.UserService;
-import bg.softuni.coffeeshop.vallidation.annotation.UniqueEmail;
+import bg.softuni.musicdb.service.UserService;
+import bg.softuni.musicdb.vallidation.annotation.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

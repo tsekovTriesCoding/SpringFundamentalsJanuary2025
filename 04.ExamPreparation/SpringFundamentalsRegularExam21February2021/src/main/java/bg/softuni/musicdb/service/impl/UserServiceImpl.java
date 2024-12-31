@@ -1,5 +1,6 @@
 package bg.softuni.musicdb.service.impl;
 
+import bg.softuni.musicdb.model.dto.RegisterDTO;
 import bg.softuni.musicdb.model.entity.User;
 import bg.softuni.musicdb.repository.UserRepository;
 import bg.softuni.musicdb.service.UserService;
@@ -57,5 +58,21 @@ public class UserServiceImpl implements UserService {
         admin.setEmail("admin@abv.bg");
 
         this.userRepository.save(admin);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFullName());
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+
+        this.userRepository.save(user);
     }
 }

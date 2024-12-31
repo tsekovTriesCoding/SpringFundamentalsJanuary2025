@@ -1,11 +1,13 @@
 package bg.softuni.musicdb.controller;
 
 import bg.softuni.musicdb.model.dto.LoginDTO;
+import bg.softuni.musicdb.model.dto.RegisterDTO;
 import bg.softuni.musicdb.service.UserService;
 import bg.softuni.musicdb.util.LoggedUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,11 @@ public class UserController {
     @ModelAttribute
     public LoginDTO loginDTO() {
         return new LoginDTO();
+    }
+
+    @ModelAttribute
+    public RegisterDTO registerDTO() {
+        return new RegisterDTO();
     }
 
     @GetMapping("/login")
@@ -70,4 +77,26 @@ public class UserController {
         return "register";
     }
 
+    @PostMapping("/register")
+    String registerConfirm(@Valid RegisterDTO registerDTO, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
+            result.addError(
+                    new FieldError(
+                            "differentConfirmPassword",
+                            "confirmPassword",
+                            "Passwords don't match."));
+        }
+
+        if (result.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("registerDTO", registerDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.registerDTO", result);
+
+            return "redirect:/users/register";
+        }
+
+        this.userService.register(registerDTO);
+
+        return "redirect:/home";
+    }
 }
