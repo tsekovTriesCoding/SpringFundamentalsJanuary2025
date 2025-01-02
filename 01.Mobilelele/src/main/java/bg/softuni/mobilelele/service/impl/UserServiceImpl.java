@@ -17,51 +17,40 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final CurrentUser currentUser;
 
-    public UserServiceImpl(UserRepository userRepository,
-                           ModelMapper modelMapper,
-                           PasswordEncoder passwordEncoder,
-                           CurrentUser currentUser) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.currentUser = currentUser;
     }
 
-    @Override
     public void registerUser(UserRegistrationDTO userRegistrationDTO) {
-        this.userRepository.saveAndFlush(map(userRegistrationDTO));
+        this.userRepository.saveAndFlush(this.map(userRegistrationDTO));
     }
 
-    @Override
     public boolean login(UserLoginDTO userLoginDTO) {
-        User user = this.userRepository.findByEmail(userLoginDTO.email())
-                .orElse(null);
+        User user = this.userRepository.findByEmail(userLoginDTO.email()).orElse(null);
+        if (userLoginDTO.password() != null && user != null && user.getPassword() != null) {
+            boolean success = this.passwordEncoder.matches(userLoginDTO.password(), user.getPassword());
 
-        if (userLoginDTO.password() == null || user == null || user.getPassword() == null) {
-            return false;
+            if (success) {
+                this.currentUser.setLoggedIn(true);
+                this.currentUser.setFullName(user.getFirstName() + " " + user.getLastName());
+            } else {
+                this.currentUser.clean();
+            }
+
         }
-
-        boolean success = passwordEncoder.matches(userLoginDTO.password(), user.getPassword());
-
-        if (success) {
-            this.currentUser.setLoggedIn(true);
-            this.currentUser.setFullName(user.getFirstName() + " " + user.getLastName());
-        } else {
-            this.currentUser.clean();
-        }
-
         return false;
     }
 
-    @Override
     public void logout() {
-         this.currentUser.clean();
+        this.currentUser.clean();
     }
 
     private User map(UserRegistrationDTO userRegistrationDTO) {
         User user = this.modelMapper.map(userRegistrationDTO, User.class);
         user.setPassword(this.passwordEncoder.encode(userRegistrationDTO.getPassword()));
-
         return user;
     }
 }
