@@ -4,11 +4,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class LoginDTO {
-    @Size(min = 5, max = 20, message = "Length must be between 3 and 20 characters")
+    @Size(min = 3, max = 20, message = "Length must be between 3 and 20 characters")
     @NotNull
     private String username;
 
-    @Size(min = 3, message = "Length must be between 5 and 20 characters")
+    @Size(min = 5, message = "Length must be between 5 and 20 characters")
     @NotNull
     private String password;
 
