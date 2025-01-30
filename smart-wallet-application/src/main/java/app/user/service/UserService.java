@@ -10,6 +10,7 @@ import app.wallet.model.Wallet;
 import app.wallet.service.WalletService;
 import app.web.dto.LoginRequest;
 import app.web.dto.RegisterRequest;
+import app.web.dto.UserEditRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -78,6 +79,27 @@ public class UserService {
         return user;
     }
 
+    public List<User> getAllUsers() {
+
+        return userRepository.findAll();
+    }
+
+    public User getById(UUID id) {
+
+        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(id)));
+    }
+
+    public void editUserDetails(UUID userId, UserEditRequest userEditRequest) {
+        User user = getById(userId);
+
+        user.setFirstName(userEditRequest.getFirstName());
+        user.setLastName(userEditRequest.getLastName());
+        user.setEmail(userEditRequest.getEmail());
+        user.setProfilePicture(userEditRequest.getProfilePicture());
+
+        userRepository.save(user);
+    }
+
     private User initializeUser(RegisterRequest registerRequest) {
 
         return User.builder()
@@ -89,15 +111,5 @@ public class UserService {
                 .createdOn(LocalDateTime.now())
                 .updatedOn(LocalDateTime.now())
                 .build();
-    }
-
-    public List<User> getAllUsers() {
-
-        return userRepository.findAll();
-    }
-
-    public User getById(UUID id) {
-
-        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(id)));
     }
 }
