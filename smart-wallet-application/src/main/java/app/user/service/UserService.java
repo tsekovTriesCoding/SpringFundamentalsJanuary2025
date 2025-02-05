@@ -79,17 +79,8 @@ public class UserService {
         return user;
     }
 
-    public List<User> getAllUsers() {
-
-        return userRepository.findAll();
-    }
-
-    public User getById(UUID id) {
-
-        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(id)));
-    }
-
     public void editUserDetails(UUID userId, UserEditRequest userEditRequest) {
+
         User user = getById(userId);
 
         user.setFirstName(userEditRequest.getFirstName());
@@ -111,5 +102,45 @@ public class UserService {
                 .createdOn(LocalDateTime.now())
                 .updatedOn(LocalDateTime.now())
                 .build();
+    }
+
+    public List<User> getAllUsers() {
+
+        return userRepository.findAll();
+    }
+
+    public User getById(UUID id) {
+
+        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id [%s] does not exist.".formatted(id)));
+    }
+
+    public void switchStatus(UUID userId) {
+
+        User user = getById(userId);
+
+        // НАЧИН 1:
+//        if (user.isActive()){
+//            user.setActive(false);
+//        } else {
+//            user.setActive(true);
+//        }
+
+        // false -> true
+        // true -> false
+        user.setActive(!user.isActive());
+        userRepository.save(user);
+    }
+
+    public void switchRole(UUID userId) {
+
+        User user = getById(userId);
+
+        if (user.getRole() == UserRole.USER) {
+            user.setRole(UserRole.ADMIN);
+        } else {
+            user.setRole(UserRole.USER);
+        }
+
+        userRepository.save(user);
     }
 }
