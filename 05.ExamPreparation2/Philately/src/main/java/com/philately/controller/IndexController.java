@@ -96,4 +96,10 @@ public class IndexController {
 
         return "redirect:/home";
     }
+
+    @GetMapping("/logout")
+    public String getLogoutPage(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
