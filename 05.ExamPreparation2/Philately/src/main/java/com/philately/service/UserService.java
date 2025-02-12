@@ -1,5 +1,6 @@
 package com.philately.service;
 
+import com.philately.model.dto.LoginRequest;
 import com.philately.model.dto.RegisterRequest;
 import com.philately.model.entity.User;
 import com.philately.repository.UserRepository;
@@ -32,5 +33,20 @@ public class UserService {
                 .setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         userRepository.save(user);
+    }
+
+    public User loginUser(LoginRequest loginRequest) {
+        Optional<User> optionalUser = userRepository.findByUsername(loginRequest.getUsername());
+        if (optionalUser.isEmpty()) {
+            throw new RuntimeException("User with this username does not exist.");
+        }
+
+        User user = optionalUser.get();
+
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Incorrect username or password.");
+        }
+
+        return user;
     }
 }

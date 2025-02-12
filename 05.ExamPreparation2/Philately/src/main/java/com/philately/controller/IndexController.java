@@ -2,7 +2,9 @@ package com.philately.controller;
 
 import com.philately.model.dto.LoginRequest;
 import com.philately.model.dto.RegisterRequest;
+import com.philately.model.entity.User;
 import com.philately.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -61,5 +63,19 @@ public class IndexController {
         modelAndView.addObject("loginRequest", new LoginRequest());
 
         return modelAndView;
+    }
+
+    @PostMapping("/login")
+    public String processLoginRequest(@Valid LoginRequest loginRequest, BindingResult bindingResult, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        User user = userService.loginUser(loginRequest);
+
+        session.setAttribute("user_id", user.getId());
+
+        return "redirect:/home";
     }
 }
