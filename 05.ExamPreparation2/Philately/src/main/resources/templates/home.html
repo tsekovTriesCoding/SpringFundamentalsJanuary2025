@@ -93,7 +93,7 @@
                                      height="55" style="padding-top: 0.3em; padding-left: 0.3em">
                                 <td style="text-align: end; padding-right: 5px">Price: {stampPrice} $</td>
                                 <td style="width: 15%; padding-top: 8px; padding-right: 5px">
-                                    <a class="btn-danger btn">Remove</a>
+                                    <a th:href="@{'/stamps/wished/remove/' + ${stamp.id}}" class="btn-danger btn">Remove</a>
                                 </td>
                             </tr>
                         </table>

@@ -50,6 +50,12 @@ public class StampService {
         wishedStampRepository.save(wishedStamp);
     }
 
+    public void removeWishedStamp(UUID stampId, User user) {
+        WishedStamp wishedStamp = wishedStampRepository.findById(stampId).orElseThrow(() -> new RuntimeException("Stamp with id %s does not exist".formatted(stampId)));
+        user.getWishedStamps().remove(wishedStamp);
+        wishedStampRepository.delete(wishedStamp);
+    }
+
     private Stamp getById(UUID stampId) {
         return stampRepository.findById(stampId).orElseThrow(() -> new RuntimeException("Stamp with id %s does not exist".formatted(stampId)));
     }

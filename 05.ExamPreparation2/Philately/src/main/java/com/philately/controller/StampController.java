@@ -67,4 +67,14 @@ public class StampController {
         return "redirect:/home";
     }
 
+    @GetMapping("/wished/remove/{id}")
+    public String removeFromWishedStamps(@PathVariable UUID id, HttpSession session) {
+
+        UUID userId = (UUID) session.getAttribute("user_id");
+        User user = userService.getById(userId);
+
+        stampService.removeWishedStamp(id, user);
+
+        return "redirect:/home";
+    }
 }
