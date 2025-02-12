@@ -13,8 +13,8 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 123321
-    username: root
+    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME}
     url: jdbc:mysql://localhost:3306/paintings_collectors?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
 logging:
   level:
