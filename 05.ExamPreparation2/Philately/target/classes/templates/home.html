@@ -12,18 +12,22 @@
                 <div>
                     <div class="home-fields" style="height: 40vh; overflow: auto">
                         <h3 class="my-stamps">My Stamps</h3>
-                        <table class="my-table table-striped table-dark">
+                        <table th:each="stamp : ${myStamps}" class="my-table table-striped table-dark">
                             <tr class="my-stamps">
                                 <td>
-                                    <img src="" alt="" width="70px"
+                                    <img th:src="${stamp.imageUrl}" src="" alt="" width="70px"
                                          height="70px">
                                 </td>
-                                <td style="text-align: start">Name: {stampName}</td>
-                                <td style="text-align: end; padding-right: 5px">Description: {stampDescription}</td>
+                                <td th:text="|Name: ${stamp.name}|" style="text-align: start">Name: {stampName}</td>
+                                <td th:text="|Description: ${stamp.description}|"
+                                    style="text-align: end; padding-right: 5px">Description: {stampDescription}
+                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                <td style="text-align: start">Used paper: {stampPaper}</td>
+                                <td th:text="|User Paper: ${stamp.paper}|" style="text-align: start">Used paper:
+                                    {stampPaper}
+                                </td>
                                 <td style="text-align: end; padding-right: 5px">Price: {stampsPrice}$
                                 </td>
                             </tr>
@@ -53,26 +57,27 @@
                 <div class="home-fields" style="height: 40vh; overflow: auto">
                     <h3 class="my-stamps">Offered Stamps</h3>
                     <ul class="list-group list-group-vertical text-dark">
-                        <li>
+                        <li th:each="stamp : ${otherStamps}">
                             <div class="my-stamps-first-row">
                                 <div class="img1">
-                                    <img id="image" width="85px" src="{stampImageUrl}" alt=""
+                                    <img th:src="${stamp.imageUrl}" id="image" width="85px" src="{stampImageUrl}" alt=""
                                          height="85" style="padding-top: 0.3em; padding-left: 0.3em; margin-top: 2.3em">
                                 </div>
                                 <div class="stamp-info">
-                                    <p>Name: {stampName}</p>
-                                    <p>Description: {stampDescription}</p>
+                                    <p th:text="|Name: ${stamp.name}|">Name: {stampName}</p>
+                                    <p th:text="|Description: ${stamp.description}|">Description: {stampDescription}</p>
                                 </div>
                             </div>
                             <div class="buttons-info">
                                 <div class="favorite">
-                                    <p><a class="btn-outline-info btn">To Wishlist
+                                    <p><a th:href="@{'/stamps/wished/' + ${stamp.id}}"
+                                          class="btn-outline-info btn">To Wishlist
                                     </a>
                                     </p>
                                 </div>
                             </div>
                             <div class="second-info">
-                                <p>Added by: {stampOwner}</p>
+                                <p th:text="|Added by: ${stamp.owner.username}|">Added by: {stampOwner}</p>
                                 <p></p>
                             </div>
                         </li>
@@ -82,9 +87,9 @@
                     <h3 class="my-stamps">My Wishlist</h3>
                     <div class="wish-list">
                         <table class="my-table">
-                            <tr class="my-stamps">
-                                <td style="text-align: start; padding-left: 5px">{stampName}</td>
-                                <img src="{stampImageUrl}" alt="" width="55px"
+                            <tr th:each="stamp : ${wishedStamps}" class="my-stamps">
+                                <td th:text="${stamp.name}" style="text-align: start; padding-left: 5px">{stampName}</td>
+                                <img th:src="${stamp.imageUrl}" alt="" width="55px"
                                      height="55" style="padding-top: 0.3em; padding-left: 0.3em">
                                 <td style="text-align: end; padding-right: 5px">Price: {stampPrice} $</td>
                                 <td style="width: 15%; padding-top: 8px; padding-right: 5px">
