@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.UUID;
+
 @Controller
 public class IndexController {
 
@@ -27,9 +29,14 @@ public class IndexController {
     }
 
     @GetMapping("/home")
-    public ModelAndView getHomePage() {
+    public ModelAndView getHomePage(HttpSession session) {
+        UUID userId = (UUID) session.getAttribute("user_id");
+        User user = userService.getById(userId);
+
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("home");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 

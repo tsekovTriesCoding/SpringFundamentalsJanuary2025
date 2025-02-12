@@ -5,51 +5,43 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
-    <form class="welcome add-offer-form" method="" action="/">
-    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add stamp</span></h1>
+    <form class="welcome add-offer-form" th:method="POST" th:action="@{/stamps/new}" th:object="${createStampRequest}">
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add stamp</span></h1>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2">Name</label>
             </div>
-            <input type="text" class="form-control" id="name" name="name"/>
-            <small class="bg-danger text-light rounded">Name error message</small>
+            <input th:field="*{name}" type="text" class="form-control" id="name" name="name"/>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="bg-danger text-light rounded">Name error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <input type="text"  class="form-control" id="description" name="description"/>
-            <small class="bg-danger text-light rounded">Description error message</small>
+            <input th:field="*{description}" type="text" class="form-control" id="description" name="description"/>
+            <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="bg-danger text-light rounded">Description error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="imageUrl" class="h4 mb-2">Image URL</label>
             </div>
-            <textarea type="text" class="form-control" id="imageUrl" name="imageUrl"></textarea>
-            <small class="bg-danger text-light rounded">Image URL error message</small>
-        </div>
-
-        <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="price" class="h4 mb-2">Price</label>
-            </div>
-            <input type="number" class="form-control" id="price" name="price"/>
-            <small class="bg-danger text-light rounded">Price error message</small>
+            <textarea th:field="*{imageUrl}" type="text" class="form-control" id="imageUrl" name="imageUrl"></textarea>
+            <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="bg-danger text-light rounded">Image URL error message</small>
         </div>
 
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="paper" class="h4 mb-2">Paper</label>
             </div>
-            <select class="browser-default custom-select" id="paper" name="paper">
-                <option>Select paper</option>
-                <option></option>
+            <select th:field="*{paper}" class="browser-default custom-select" id="paper" name="paper">
+                <option value="">Select paper</option>
+                <option th:each="paper : ${T(com.philately.model.entity.Paper).values()}" th:value="${paper}" th:text="${paper}">Select paper</option>
             </select>
 
-            <small class="bg-danger text-light rounded">Paper error message</small>
+            <small th:if="${#fields.hasErrors('paper')}" th:errors="*{paper}" class="bg-danger text-light rounded">Paper error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

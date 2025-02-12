@@ -14,16 +14,16 @@
     <nav>
         <div class="home">
             <a href="/">Philately App</a>
-            <a href="/">Add Stamp</a>
+            <a th:if="${user}" th:href="@{/stamps/new}">Add Stamp</a>
         </div>
         <div class="links">
-            <li>
+            <li th:unless="${user}">
                 <a th:href="@{/login}">Login</a>
             </li>
-            <li>
+            <li th:unless="${user}">
                 <a th:href="@{/register}">Register</a>
             </li>
-            <li>
+            <li th:if="${user}">
                 <a th:href="@{/logout}">Logout</a>
             </li>
         </div>
