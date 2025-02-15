@@ -2,13 +2,12 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: 'TRUE'
     hibernate:
       ddl-auto: update
     open-in-view: 'false'
   mvc:
-    hiddenmethod:
+    hidden method:
       filter:
         enabled: 'true'
   datasource:

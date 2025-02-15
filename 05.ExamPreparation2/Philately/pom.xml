@@ -5,10 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.7</version>
+        <version>3.4.0</version>
         <relativePath/>
     </parent>
-    <groupId>com</groupId>
+    <groupId>project</groupId>
     <artifactId>Philately</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Philately</name>
@@ -57,7 +57,6 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10.1</version>
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
@@ -75,9 +74,14 @@
             <version>3.1.0</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>10.1.19</version>
+            <version>11.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
@@ -85,10 +89,16 @@
             <version>3.0.2</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>

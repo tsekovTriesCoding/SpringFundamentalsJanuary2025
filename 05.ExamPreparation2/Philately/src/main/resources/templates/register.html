@@ -12,8 +12,7 @@
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="username" class="h4 mb-2 text-white">Username</label>
             </div>
-
-            <input th:field="*{username}" type="text" class="form-control" id="username" name="username"/>
+            <input type="text" class="form-control" id="username" name="username" th:field="*{username}"/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger text-light rounded" style="font-size: 15px">Username error message</small>
         </div>
 
@@ -21,30 +20,29 @@
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="email" class="h4 mb-2">Email</label>
             </div>
-            <input th:field="*{email}" type="email" class="form-control" id="email" name="email" />
-            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger text-light rounded">Email error message</small>
+            <input type="email" class="form-control" id="email" name="email" th:field="*{email}"/>
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger text-light rounded" style="font-size: 15px">Username error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="password" class="h4 mb-2">Password</label>
             </div>
-            <input th:field="*{password}" type="password" class="form-control" id="password" name="password"/>
-            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded">Password error message</small>
+            <input type="password" class="form-control" id="password" name="password" th:field="*{password}"/>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger text-light rounded" style="font-size: 15px">Username error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
             </div>
-            <input th:field="*{confirmPassword}" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-            <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="bg-danger text-light rounded">Password error message</small>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}"/>
+            <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="bg-danger text-light rounded" style="font-size: 15px">Username error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" value="Register">Register</button>
         </div>
-
     </form>
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>

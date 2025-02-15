@@ -70,8 +70,11 @@ textarea {
     position: relative;
     border-radius: 12px;
     margin-top: 8em;
+    /*color: #5a6268;*/
+    /*color: #021b41;*/
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     padding: 1em;
+    /*background-color: #7e7d7d;*/
     background-color: rgb(115, 116, 117);
     max-width: 1340px;
     text-align: center;
@@ -86,6 +89,9 @@ textarea {
     width: 60%;
     transition: 0.1s ease-in;
     margin-top: 6em;
+    /*-moz-outline-radius: 12px;*/
+    /*outline: 2px solid #9f9fa1;*/
+    /*outline-offset: -8px;*/
     background-color: rgb(185, 185, 187);
 }
 
@@ -154,6 +160,7 @@ ul li {
 }
 
 ul li:hover {
+    /*transform: translateY(-1px);*/
     background-color: #98999a;
     border: white solid 2px;
 }
@@ -169,10 +176,21 @@ ul li:hover {
 }
 
 .my-stamps {
-    border-radius: 4px;
-    padding: 6px;
+    display: flex;
+    border-radius: 5px;
     color: rgba(207, 230, 243, 0.78);
     background-color: rgba(24, 24, 24, 0.92);
+    align-items: center;
+    padding-left: 50px;
+    gap: 20px;
+}
+
+.my-cell-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
 }
 
 .wish-list {
@@ -266,10 +284,10 @@ footer {
     display: none;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     color: white;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 50px; /* Adjust padding to center content vertically */
     box-sizing: border-box;
 }
 
@@ -321,4 +339,8 @@ a:hover {
 .count, .user {
     border-radius: 4px;
     padding: 0.1em 0;
+}
+
+.my-table.my-wishlist tr {
+    margin-bottom: 4px;
 }

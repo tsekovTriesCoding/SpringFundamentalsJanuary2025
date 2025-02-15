@@ -10,45 +10,20 @@
         <div class="row mt-1 mb-2">
             <div class="col-6 mt-1 mb-1">
                 <div>
-                    <div class="home-fields" style="height: 40vh; overflow: auto">
+                    <div class="home-fields" style="height: 80vh; overflow: auto">
                         <h3 class="my-stamps">My Stamps</h3>
-                        <table th:each="stamp : ${myStamps}" class="my-table table-striped table-dark">
-                            <tr class="my-stamps">
+                        <table class="my-table table-striped table-dark">
+                            <tr class="my-stamps" th:each="stamp : ${user.stamps}">
                                 <td>
-                                    <img th:src="${stamp.imageUrl}" src="" alt="" width="70px"
-                                         height="70px">
+                                    <img th:src="${stamp.imageUrl}" alt="The Queen" width="70px" height="70px">
                                 </td>
-                                <td th:text="|Name: ${stamp.name}|" style="text-align: start">Name: {stampName}</td>
-                                <td th:text="|Description: ${stamp.description}|"
-                                    style="text-align: end; padding-right: 5px">Description: {stampDescription}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <td th:text="|User Paper: ${stamp.paper}|" style="text-align: start">Used paper:
-                                    {stampPaper}
-                                </td>
-                                <td style="text-align: end; padding-right: 5px">Price: {stampsPrice}$
+                                <td class="my-cell-container">
+                                    <div>Name: <span th:text="${stamp.name}"></span></div>
+                                    <div>Description: <span th:text="${stamp.description}"></span></div>
+                                    <div>Used paper: <span th:text="${stamp.paper}"></span></div>
                                 </td>
                             </tr>
                         </table>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="home-fields" style="height: 39vh; overflow: auto">
-                        <h3 class="my-stamps">My Purchases</h3>
-                        <div class="bought">
-                            <div>
-                                <div class="stamp">
-                                    <div class="item">
-                                        <img src="{stampImageUrl}" alt="" width="100px"
-                                             height="100px">
-                                        <p>{stampName}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -57,28 +32,25 @@
                 <div class="home-fields" style="height: 40vh; overflow: auto">
                     <h3 class="my-stamps">Offered Stamps</h3>
                     <ul class="list-group list-group-vertical text-dark">
-                        <li th:each="stamp : ${otherStamps}">
+                        <li th:each="stamp : ${allStamps}" th:if="${stamp.owner.id != user.id}">
                             <div class="my-stamps-first-row">
                                 <div class="img1">
-                                    <img th:src="${stamp.imageUrl}" id="image" width="85px" src="{stampImageUrl}" alt=""
-                                         height="85" style="padding-top: 0.3em; padding-left: 0.3em; margin-top: 2.3em">
+                                    <img id="image" width="85px" th:src="${stamp.imageUrl}" alt="US Mail" height="85" style="padding-top: 0.3em; padding-left: 0.3em; margin-top: 2.3em">
                                 </div>
                                 <div class="stamp-info">
-                                    <p th:text="|Name: ${stamp.name}|">Name: {stampName}</p>
-                                    <p th:text="|Description: ${stamp.description}|">Description: {stampDescription}</p>
+                                    <p>Name: <span th:text="${stamp.name}"></span></p>
+                                    <p>Description: <span th:text="${stamp.description}"></span></p>
                                 </div>
                             </div>
                             <div class="buttons-info">
                                 <div class="favorite">
-                                    <p><a th:href="@{'/stamps/wished/' + ${stamp.id}}"
-                                          class="btn-outline-info btn">To Wishlist
-                                    </a>
-                                    </p>
+                                    <form th:action="@{'/stamps/' + ${stamp.id} + '/whishlist'}" th:method="POST">
+                                        <button class="btn-outline-info btn">To Wishlist</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="second-info">
-                                <p th:text="|Added by: ${stamp.owner.username}|">Added by: {stampOwner}</p>
-                                <p></p>
+                                <p th:text="${'Added by: ' + stamp.owner.username}"></p>
                             </div>
                         </li>
                     </ul>
@@ -86,29 +58,31 @@
                 <div class="home-fields" style="height: 39vh; overflow: auto">
                     <h3 class="my-stamps">My Wishlist</h3>
                     <div class="wish-list">
-                        <table class="my-table">
-                            <tr th:each="stamp : ${wishedStamps}" class="my-stamps">
-                                <td th:text="${stamp.name}" style="text-align: start; padding-left: 5px">{stampName}</td>
-                                <img th:src="${stamp.imageUrl}" alt="" width="55px"
-                                     height="55" style="padding-top: 0.3em; padding-left: 0.3em">
-                                <td style="text-align: end; padding-right: 5px">Price: {stampPrice} $</td>
+                        <table class="my-table my-wishlist">
+                            <tr class="my-stamps" th:each="stamp : ${user.wishedStamps}">
+                                <td>
+                                    <img th:src="${stamp.imageUrl}" alt="US Mail" width="55px" height="55" style="padding-top: 0.3em; padding-left: 0.3em">
+                                </td>
+                                <td style="text-align: start; padding-left: 5px" th:text="${stamp.name}"></td>
                                 <td style="width: 15%; padding-top: 8px; padding-right: 5px">
-                                    <a th:href="@{'/stamps/wished/remove/' + ${stamp.id}}" class="btn-danger btn">Remove</a>
+                                    <form th:action="@{'/stamps/' + ${stamp.id}}" th:method="DELETE">
+                                        <button class="btn-danger btn">Remove</button>
+                                    </form>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="buttons-info">
-                        <p style="margin-top: 10px"><a class="btn-info btn">Buy all
-                        </a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </main>
-<footer th:replace="~{fragments/commons::footer}"></footer>
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background footer-text fixed-bottom">
+            &copy; Spring team 2024. All rights reserved.
+        </div>
+    </div>
+</footer>
 </body>
 </html>

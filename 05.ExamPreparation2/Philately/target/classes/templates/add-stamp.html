@@ -5,14 +5,16 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 <main>
-    <form class="welcome add-offer-form" th:method="POST" th:action="@{/stamps/new}" th:object="${createStampRequest}">
+
+    <form class="welcome add-offer-form" th:method="POST" th:action="@{/stamps}" th:object="${createNewStamp}">
+
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add stamp</span></h1>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2">Name</label>
             </div>
-            <input th:field="*{name}" type="text" class="form-control" id="name" name="name"/>
+            <input type="text" class="form-control" id="name" name="name" value="" th:field="*{name}"/>
             <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="bg-danger text-light rounded">Name error message</small>
         </div>
 
@@ -20,15 +22,15 @@
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <input th:field="*{description}" type="text" class="form-control" id="description" name="description"/>
-            <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="bg-danger text-light rounded">Description error message</small>
+            <input type="text"  class="form-control" id="description" name="description" value="" th:field="*{description}"/>
+            <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"  class="bg-danger text-light rounded">Description error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="imageUrl" class="h4 mb-2">Image URL</label>
             </div>
-            <textarea th:field="*{imageUrl}" type="text" class="form-control" id="imageUrl" name="imageUrl"></textarea>
+            <textarea type="text" class="form-control" id="imageUrl" name="imageUrl" th:field="*{imageUrl}"></textarea>
             <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="bg-danger text-light rounded">Image URL error message</small>
         </div>
 
@@ -36,11 +38,9 @@
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="paper" class="h4 mb-2">Paper</label>
             </div>
-            <select th:field="*{paper}" class="browser-default custom-select" id="paper" name="paper">
-                <option value="">Select paper</option>
-                <option th:each="paper : ${T(com.philately.model.entity.Paper).values()}" th:value="${paper}" th:text="${paper}">Select paper</option>
+            <select class="browser-default custom-select" id="paper" name="paper" th:field="*{paper}">
+                <option th:each="paper : ${T(Philately.stamp.model.Paper).values()}" th:value="${paper}" th:text="${paper}"></option>
             </select>
-
             <small th:if="${#fields.hasErrors('paper')}" th:errors="*{paper}" class="bg-danger text-light rounded">Paper error message</small>
         </div>
 
@@ -50,6 +50,12 @@
 
     </form>
 </main>
-<footer th:replace="~{fragments/commons::footer}"></footer>
+<footer class="footer bg-transparent py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background footer-text fixed-bottom">
+            &copy; Spring team 2024. All rights reserved.
+        </div>
+    </div>
+</footer>
 </body>
 </html>
